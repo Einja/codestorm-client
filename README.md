@@ -7,7 +7,7 @@ LeetCode Mini is a work-in-progress project aimed at creating a simplified versi
 ## Features (To be added)
 
 - User authentication and profile management/metrics display
-- A collection of coding problems categorized by difficulty (500 - 2000)
+- A collection of coding problems categorized by difficulty (500 - 2000). Each problem will have a runtime and memory limit described in big-O notation
 - Code editor with syntax highlighting
 - Real-time code execution and result display
 - Problem submission and solution tracking
