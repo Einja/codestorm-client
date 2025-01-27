@@ -1,8 +1,10 @@
-import React from 'react';
-
+import React from "react";
+import ToggleTheme from "./ToggleTheme";
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-gray-700 p-4 text-white font-bold">
+    <nav
+      className="p-4 font-bold"
+    >
       <div className="container m-auto flex justify-between items-center md:flex">
         <ul className="flex space-x-10">
           <li>
@@ -18,7 +20,7 @@ const Navbar: React.FC = () => {
 
         <ul className="flex space-x-10">
           <a href="/about">About</a>
-          <a href="/contact">Contact</a>
+          <ToggleTheme />
           <button>Sign In</button>
         </ul>
       </div>
