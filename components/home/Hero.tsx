@@ -4,7 +4,7 @@ const Hero: React.FC = () => {
   return (
     <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
       <div className="text-left max-w-lg">
-        <h1 className="text-6xl font-bold mb-4 text-center">Mini-LeetCode</h1>
+        <h1 className="text-6xl font-bold mb-4 text-center">CodeCipher</h1>
         <p className="text-2xl font-bold flex items-center text-center">
           The #1 modern day competitive programming and technical interview
           preparation platform.
