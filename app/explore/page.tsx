@@ -6,7 +6,7 @@ export default function page() {
       <div className="container mb-40">
         <p className="mb-5 text-lg ml-1">Welcome to</p>
         <p className="text-left max-w-lg font-bold text-4xl">
-          Mini-LeetCode Explore
+          CodeCipher Explore
         </p>
       </div>
       <div className="container my-auto">

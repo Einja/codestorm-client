@@ -9,7 +9,7 @@ const ToggleTheme: React.FC = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme(prev => (prev === "light" ? "dark" : "light"));
   };
 
   return <button onClick={toggleTheme}>Change Theme</button>;

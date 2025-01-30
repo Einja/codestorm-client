@@ -4,8 +4,8 @@ import Navbar from "../components/Navbar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Mini-LeetCode",
-  description: "Small LeetCode application",
+  title: "CodeCipher",
+  description: "Solve programming problems and learn",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
