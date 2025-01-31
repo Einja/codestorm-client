@@ -13,6 +13,8 @@ LeetCode Mini is a work-in-progress project aimed at creating a simplified versi
 - Problem submission and solution tracking
 - Discussion forum
 - Contests with rewards and user ELO
+- Matchmaking and 1v1 system against other users
+   - Each player is given a list of problems that are around their intended ELO. Whoever solves all problems first or ends with the most points wins the match and gains ELO. The loser will lose ELO.
 
 ## Installation
 
