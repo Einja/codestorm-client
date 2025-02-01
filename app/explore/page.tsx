@@ -3,7 +3,7 @@ import React from "react";
 import Card from "../../components/explore/Card";
 import useDragToScroll from "../../hooks/useDragtoScroll";
 
-export default function page() {
+export default function Page() {
   const scrollContainerRef = useDragToScroll();
   return (
     <div className="fade-in">
