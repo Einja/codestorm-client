@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <body style = {{backgroundColor: "var(--background-color)"}}>
         <Navbar />
-        <main className="container mx-auto mt-8">{children}</main>
+        <main className="container mx-auto mt-8 mb-8">{children}</main>
         <Footer />
       </body>
     </html>
