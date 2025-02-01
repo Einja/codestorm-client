@@ -1,25 +1,24 @@
 import React from "react";
+import Link from "next/link";
 import ToggleTheme from "./ToggleTheme";
 const Navbar: React.FC = () => {
   return (
-    <nav
-      className="p-4 font-bold"
-    >
+    <nav className="p-4 font-bold">
       <div className="container m-auto flex justify-between items-center md:flex">
         <ul className="flex space-x-10">
           <li>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <a href="/explore">Explore</a>
+            <Link href="/explore">Explore</Link>
           </li>
           <li>
-            <a href="/problems">Problems</a>
+            <Link href="/problems">Problems</Link>
           </li>
         </ul>
 
         <ul className="flex space-x-10">
-          <a href="/about">About</a>
+          <Link href="/about">About</Link>
           <ToggleTheme />
           <button>Sign In</button>
         </ul>

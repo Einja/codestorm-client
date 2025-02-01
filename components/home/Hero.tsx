@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Hero: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="mt-10 md:mt-0">
-        <img
+        <Image
           src="images/hierarchical.svg"
           alt="Coding topics flowchart"
           width={450}
