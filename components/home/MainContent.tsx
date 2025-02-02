@@ -7,9 +7,9 @@ const MainContent: React.FC = () => {
           Learning Made Simple
         </h1>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row items-center justify-between">
           {/*left*/}
-          <div className="w-1/2 p-10">
+          <div className="md:w-1/2 p-10">
             <h2 className="text-4xl font-bold mb-4">
               Data Structures and Algorithms
             </h2>
@@ -20,7 +20,7 @@ const MainContent: React.FC = () => {
           </div>
           {/*right*/}
           <div
-            className="flex-shrink-0 bg-cyan-950 p-4 rounded-xl text-white"
+            className="flex-shrink-0 bg-cyan-950 p-4 rounded-xl text-white w-full md:w-auto"
             style={{ width: "40rem", height: "24rem" }}
           >
             <h2 className="text-4xl font-bold mb-10">
