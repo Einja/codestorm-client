@@ -8,13 +8,13 @@ export default function Page() {
   return (
     <div className="fade-in">
       <div className="container mb-40">
-        <p className="mb-5 text-lg ml-1">Welcome to</p>
-        <p className="text-left max-w-lg font-bold text-4xl">
+        <p className="mb-5 text-lg text-bold ml-1">Welcome to</p>
+        <p className="text-left max-w-lg text-4xl">
           CodeStorm Explore
         </p>
       </div>
       <div className="container my-auto">
-        <p className="text-left max-w-lg font-bold text-4xl">Learn</p>
+        <p className="text-left max-w-lg text-4xl">Learn</p>
         <div
           ref={scrollContainerRef}
           className="select-none flex overflow-x-scroll no-scrollbar space-x-4 p-4"

@@ -17,11 +17,16 @@
   --text-color: #000000;
 }
 
+@font-face {
+  font-family: "8Bit";
+  src: url("../public/fonts/slkscr.ttf") format("truetype");
+}
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
-  font-family: Arial, Verdana, sans-serif;
+  font-family: '8Bit', sans-serif;
 }
 
 @layer utilities {
