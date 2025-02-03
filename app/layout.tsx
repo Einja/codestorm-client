@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CodeCipher",
+  title: "CodeStorm",
   description: "Solve programming problems and learn",
 };
 

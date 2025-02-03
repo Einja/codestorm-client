@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
     <footer className="p-4">
       <hr className="w-1/4 mx-auto my-10"/>
       <div className="container mx-auto text-center">
-        <p>Copyright &copy; CodeCipher 2025, All rights reserved.</p>
+        <p>Copyright &copy; CodeStorm 2025, All rights reserved.</p>
       </div>
     </footer>
   );
