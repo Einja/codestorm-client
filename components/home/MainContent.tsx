@@ -20,11 +20,11 @@ const MainContent: React.FC = () => {
           </div>
           {/*right*/}
           <div
-            className="flex-shrink-0 bg-cyan-950 p-4 rounded-xl text-white w-full md:w-auto"
+            className="flex-shrink-0 bg-blue-700 p-4 rounded-xl text-white w-full md:w-auto"
             style={{ width: "40rem", height: "24rem" }}
           >
             <h2 className="text-4xl font-bold mb-10">
-              Pretend this is a GIF or smth
+              DSA GIF HERE
             </h2>
           </div>
         </div>

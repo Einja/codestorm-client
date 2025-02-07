@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background-color: #1f2937;
+  --background-color: #1b1b1b;
   --text-color: #ffffff;
 }
 
 [data-theme="dark"] {
-  --background-color: #1f2937;
+  --background-color: #1b1b1b;
   --text-color: #ffffff;
 }
 
