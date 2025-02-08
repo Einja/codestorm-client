@@ -1,8 +1,8 @@
-# LeetCode Mini
+# CodeStorm
 
 ## Overview
 
-LeetCode Mini is a work-in-progress project aimed at creating a simplified version of the popular coding challenge platform, LeetCode. This project is designed to help users practice coding problems for technical interview preparation and programming contests. I want this to become a unique platform in the sense it combines Codeforces and LeetCode together in a modern web aesthetic.
+CodeStorm is a work-in-progress project aimed at creating a simplified version of the popular coding challenge platform, LeetCode. This project is designed to help users practice coding problems for technical interview preparation and programming contests. I want this to become a unique platform in the sense it combines Codeforces and LeetCode together in a modern web aesthetic.
 
 ## Features (To be added)
 
@@ -21,9 +21,7 @@ LeetCode Mini is a work-in-progress project aimed at creating a simplified versi
 If you want to look at the current and play around with it, follow these steps:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/leetcode-mini.git
-   ```
+
 2. Navigate to the project directory:
    ```bash
    cd leetcode-mini
