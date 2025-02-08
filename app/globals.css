@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background-color: #1f2937;
+  --background-color: #1b1b1b;
   --text-color: #ffffff;
 }
 
 [data-theme="dark"] {
-  --background-color: #1f2937;
+  --background-color: #1b1b1b;
   --text-color: #ffffff;
 }
 
@@ -17,11 +17,16 @@
   --text-color: #000000;
 }
 
+@font-face {
+  font-family: "8Bit";
+  src: url("../public/fonts/slkscr.ttf") format("truetype");
+}
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
-  font-family: Arial, Verdana, sans-serif;
+  font-family: '8Bit', sans-serif;
 }
 
 @layer utilities {

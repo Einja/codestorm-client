@@ -3,7 +3,7 @@ import Link from "next/link";
 import ToggleTheme from "./ToggleTheme";
 const Navbar: React.FC = () => {
   return (
-    <nav className="p-4 font-bold">
+    <nav className="p-4">
       <div className="container m-auto flex justify-between items-center md:flex">
         <ul className="flex space-x-10">
           <li>
