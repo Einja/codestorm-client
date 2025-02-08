@@ -14,6 +14,7 @@ const CreateAccount: React.FC<CreateAccountProps> = ({ switchAuthDisplay }) => {
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none"
             type="text"
+            style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
           />
         </div>
         <div className="mb-6">
@@ -21,6 +22,7 @@ const CreateAccount: React.FC<CreateAccountProps> = ({ switchAuthDisplay }) => {
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none"
             type="text"
+            style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
           />
         </div>
         <div className="mb-6">
@@ -28,6 +30,7 @@ const CreateAccount: React.FC<CreateAccountProps> = ({ switchAuthDisplay }) => {
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 focus:outline-none"
             type="password"
+            style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
           />
         </div>
         <div className="flex items-center justify-center">
@@ -35,7 +38,7 @@ const CreateAccount: React.FC<CreateAccountProps> = ({ switchAuthDisplay }) => {
             className="bg-blue-500 transition-colors duration-200 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
           >
-            Sign In
+            Register
           </button>
         </div>
         <div className="flex items-center justify-center py-4 mt-3">

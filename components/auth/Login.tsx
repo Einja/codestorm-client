@@ -13,6 +13,7 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none"
             type="text"
+            style={{fontFamily: 'Arial, Helvetica, sans-serif'}}
           />
         </div>
         <div className="mb-6">
@@ -20,6 +21,7 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 focus:outline-none"
             type="password"
+            style={{fontFamily: 'Arial, Helvetica, sans-serif'}}
           />
         </div>
         <div className="flex items-center justify-center">
