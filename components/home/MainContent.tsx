@@ -18,6 +18,7 @@ const MainContent: React.FC = () => {
               through various free courses.
             </p>
           </div>
+          
           {/*right*/}
           <div
             className="flex-shrink-0 bg-blue-700 p-4 rounded-xl text-white w-full md:w-auto"
