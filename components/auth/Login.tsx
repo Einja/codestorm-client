@@ -9,7 +9,7 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
       <h2 className="text-xl font-bold mb-4 text-center">Welcome Back</h2>
       <form>
         <div className="mb-6">
-          <label className="block text-sm font-bold mb-2">Username</label>
+          <p className="block text-sm font-bold mb-2">Username</p>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none"
             type="text"
@@ -17,7 +17,7 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-sm font-bold mb-2">Password</label>
+          <p className="block text-sm font-bold mb-2">Password</p>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 focus:outline-none"
             type="password"
@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
         <div className="flex items-center justify-center">
           <button
             className="bg-blue-500 transition-colors duration-200 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
+            type="submit"
           >
             Sign In
           </button>

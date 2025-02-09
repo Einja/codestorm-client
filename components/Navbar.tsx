@@ -16,23 +16,37 @@ const Navbar: React.FC = () => {
       <div className="container m-auto flex justify-between items-center md:flex">
         <ul className="flex space-x-10">
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/" className="hover:text-gray-300">
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/explore">Explore</Link>
+            <Link href="/explore" className="hover:text-gray-300">
+              Explore
+            </Link>
           </li>
           <li>
-            <Link href="/problems">Problems</Link>
+            <Link href="/problems" className="hover:text-gray-300">
+              Problems
+            </Link>
           </li>
         </ul>
 
         <ul className="flex space-x-10">
-          <Link href="/about">About</Link>
-          <ToggleTheme />
-          <button onClick={handleLoginClick}>Sign In</button>
+          <Link href="/about" className="hover:text-gray-300">
+            About
+          </Link>
+          <div className="hover:text-gray-300">
+            <ToggleTheme />
+          </div>
+          <div className="hover:text-gray-300">
+            <button onClick={handleLoginClick}>Sign In</button>
+          </div>
         </ul>
       </div>
-      {showLogin && <AuthModel onClose={handleLoginClick} />}
+      {showLogin && (
+        <AuthModel onClose={handleLoginClick} displayCreateAccount={true} />
+      )}
     </nav>
   );
 };

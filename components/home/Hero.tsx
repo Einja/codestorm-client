@@ -1,7 +1,14 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
+import AuthModel from "../auth/AuthModel";
 
 const Hero: React.FC = () => {
+  const [showLogin, setShowLogin] = useState(false);
+
+  const handleLoginClick = () => {
+    setShowLogin(!showLogin);
+  };
   return (
     <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
       <div className="text-left max-w-lg">
@@ -11,7 +18,10 @@ const Hero: React.FC = () => {
           preparation platform.
         </p>
         <div className="flex justify-center">
-          <button className="mt-8 bg-blue-500 text-white py-2 px-4 rounded transition-colors duration-200 hover:bg-blue-600">
+          <button
+            className="mt-8 bg-blue-500 text-white py-2 px-4 rounded transition-colors duration-200 hover:bg-blue-600"
+            onClick={handleLoginClick}
+          >
             Create Account
           </button>
         </div>
@@ -26,6 +36,9 @@ const Hero: React.FC = () => {
           className="rounded-lg shadow-lg animate-swing shadow-none"
         />
       </div>
+      {showLogin && (
+        <AuthModel onClose={handleLoginClick} displayCreateAccount={false} />
+      )}
     </div>
   );
 };
