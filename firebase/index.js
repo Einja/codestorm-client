@@ -19,15 +19,6 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyA5Ei4hwwbetW4kQfe-J4CHE_UriHwKlUo",
-//   authDomain: "codestorm-server.firebaseapp.com",
-//   projectId: "codestorm-server",
-//   storageBucket: "codestorm-server.firebasestorage.app",
-//   messagingSenderId: "225457811104",
-//   appId: "1:225457811104:web:77366449e47f66d889a3c5",
-//   measurementId: "G-90X6G76ERG",
-// }
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
