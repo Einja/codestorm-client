@@ -1,11 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import ToggleTheme from "./ToggleTheme";
+import Username from "./auth/Username";
 import AuthModel from "./auth/AuthModel";
-
+import { listenForAuthChanges } from "../firebase/index";
+import { User } from "firebase/auth";
 const Navbar: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = listenForAuthChanges((user: User | null) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleLoginClick = () => {
     setShowLogin(!showLogin);
@@ -40,7 +55,11 @@ const Navbar: React.FC = () => {
             <ToggleTheme />
           </div>
           <div className="hover:text-gray-300">
-            <button onClick={handleLoginClick}>Sign In</button>
+            {user ? (
+              <Username username={user.displayName}/>
+            ) : (
+              <button onClick={handleLoginClick}>Sign In</button>
+            )}
           </div>
         </ul>
       </div>
