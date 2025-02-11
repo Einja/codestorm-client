@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Card from "../../components/explore/Card";
+import Card from "./components/Card";
 import useDragToScroll from "../../hooks/useDragtoScroll";
 
 export default function Page() {
@@ -9,9 +9,7 @@ export default function Page() {
     <div className="fade-in">
       <div className="container mb-40">
         <p className="mb-5 text-lg text-bold ml-1">Welcome to</p>
-        <p className="text-left max-w-lg text-4xl">
-          CodeStorm Explore
-        </p>
+        <p className="text-left max-w-lg text-4xl">CodeStorm Explore</p>
       </div>
       <div className="container my-auto">
         <p className="text-left max-w-lg text-4xl">Learn</p>

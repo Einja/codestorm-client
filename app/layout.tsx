@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import LoadingWrapper from "../components/shared/LoadingWrapper";
 import "./globals.css";
-
 export const metadata: Metadata = {
   title: "CodeStorm",
   description: "Solve programming problems and learn",
@@ -11,10 +9,11 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style = {{backgroundColor: "var(--background-color)"}}>
-        <Navbar />
-        <main className="container mx-auto mt-8 mb-8">{children}</main>
-        <Footer />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body style={{ backgroundColor: "var(--background-color)" }}>
+        <LoadingWrapper>{children}</LoadingWrapper>
       </body>
     </html>
   );

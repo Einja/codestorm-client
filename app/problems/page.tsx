@@ -1,6 +1,6 @@
 import React from "react";
-import DifficultyFilter from "../../components/problems/DifficultyFilter";
-import ProblemContainer from "../../components/problems/ProblemContainer";
+import DifficultyFilter from "./components/DifficultyFilter";
+import ProblemContainer from "./components/ProblemContainer";
 
 export default function Page() {
   return (

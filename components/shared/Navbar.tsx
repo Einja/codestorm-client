@@ -2,13 +2,17 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import ToggleTheme from "./ToggleTheme";
-import Username from "./auth/Username";
-import AuthModel from "./auth/AuthModel";
-import { listenForAuthChanges } from "../firebase/index";
+import Username from "../auth/Username";
+import AuthModel from "../auth/AuthModel";
+import { listenForAuthChanges } from "../../firebase/index";
 import { User } from "firebase/auth";
+import { FaHouse, FaMagnifyingGlass, FaPencil, FaQuestion } from "react-icons/fa6";
+import { useMediaQuery } from "react-responsive";
 const Navbar: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+
+  const onSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
 
   useEffect(() => {
     const unsubscribe = listenForAuthChanges((user: User | null) => {
@@ -28,35 +32,35 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="p-4">
-      <div className="container m-auto flex justify-between items-center md:flex">
-        <ul className="flex space-x-10">
+      <div className="container mx-auto flex justify-between items-center">
+        <ul className="flex space-x-8">
           <li>
             <Link href="/" className="hover:text-gray-300">
-              Home
+              {onSmallScreen ? <FaHouse /> : "Home"}
             </Link>
           </li>
           <li>
             <Link href="/explore" className="hover:text-gray-300">
-              Explore
+              {onSmallScreen ? <FaMagnifyingGlass /> : "Explore"}
             </Link>
           </li>
           <li>
             <Link href="/problems" className="hover:text-gray-300">
-              Problems
+              {onSmallScreen ? <FaPencil /> : "Problems"}
             </Link>
           </li>
         </ul>
 
-        <ul className="flex space-x-10">
+        <ul className="flex space-x-8">
           <Link href="/about" className="hover:text-gray-300">
-            About
+          {onSmallScreen ? <FaQuestion /> : "About"}
           </Link>
           <div className="hover:text-gray-300">
             <ToggleTheme />
           </div>
           <div className="hover:text-gray-300">
             {user ? (
-              <Username username={user.displayName}/>
+              <Username username={user.displayName} />
             ) : (
               <button onClick={handleLoginClick}>Sign In</button>
             )}

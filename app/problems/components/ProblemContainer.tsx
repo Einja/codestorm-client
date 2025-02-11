@@ -9,7 +9,7 @@ const ProblemContainer: React.FC = () => {
     router.push(`/problems/${id}`);
   };
   return (
-    <div className="bg-gray-500 p-6 mx-3 rounded-md overflow-x-auto">
+    <div className="bg-gray-500 p-6 mx-3 rounded-md text-white overflow-x-auto no-scrollbar">
       <table className="w-full bg-black shadow-md">
         <thead className="bg-gray-600">
           <tr>

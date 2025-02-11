@@ -39,18 +39,15 @@ const Username: React.FC<UsernameProps> = ({ username }) => {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <span
-        className="cursor-pointer"
+      <button
         onClick={() => setShowDropdown(!showDropdown)}
       >
         {username}
-      </span>
+      </button>
       {showDropdown && (
-        <div
-          className="mt-2 w-32 border absolute rounded p-2 flex justify-center"
-          onClick={handleLogout}
-        >
-          <button>Sign Out</button>
+        <div className="absolute mt-2 w-48 bg-black rounded-lg py-1 shadow-xl">
+          <a href="#" className="block px-4 py-1">Account Details</a>
+          <button onClick={handleLogout} className="block px-4 py-1">Sign Out</button>
         </div>
       )}
     </div>
