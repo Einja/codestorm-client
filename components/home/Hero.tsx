@@ -1,10 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import AuthModel from "../auth/AuthModel";
-
+import { listenForAuthChanges } from "../../firebase/index";
+import { User } from "firebase/auth";
 const Hero: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = listenForAuthChanges((user: User | null) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleLoginClick = () => {
     setShowLogin(!showLogin);
@@ -18,12 +31,14 @@ const Hero: React.FC = () => {
           preparation platform.
         </p>
         <div className="flex justify-center">
-          <button
-            className="mt-8 bg-blue-500 text-white py-2 px-4 rounded transition-colors duration-200 hover:bg-blue-600"
-            onClick={handleLoginClick}
-          >
-            Create Account
-          </button>
+          {!user && (
+            <button
+              className="mt-8 bg-blue-500 text-white py-2 px-4 rounded transition-colors duration-200 hover:bg-blue-600"
+              onClick={handleLoginClick}
+            >
+              Create Account
+            </button>
+          )}
         </div>
       </div>
 

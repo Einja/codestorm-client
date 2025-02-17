@@ -6,7 +6,12 @@ import Username from "../auth/Username";
 import AuthModel from "../auth/AuthModel";
 import { listenForAuthChanges } from "../../firebase/index";
 import { User } from "firebase/auth";
-import { FaHouse, FaMagnifyingGlass, FaPencil, FaQuestion } from "react-icons/fa6";
+import {
+  FaHouse,
+  FaMagnifyingGlass,
+  FaPencil,
+  FaQuestion,
+} from "react-icons/fa6";
 import { useMediaQuery } from "react-responsive";
 const Navbar: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -53,16 +58,19 @@ const Navbar: React.FC = () => {
 
         <ul className="flex space-x-8">
           <Link href="/about" className="hover:text-gray-300">
-          {onSmallScreen ? <FaQuestion /> : "About"}
+            {onSmallScreen ? <FaQuestion /> : "About"}
           </Link>
           <div className="hover:text-gray-300">
             <ToggleTheme />
           </div>
-          <div className="hover:text-gray-300">
+
+          <div>
             {user ? (
               <Username username={user.displayName} />
             ) : (
-              <button onClick={handleLoginClick}>Sign In</button>
+              <div className="hover:text-gray-300">
+                <button onClick={handleLoginClick}>Sign In</button>
+              </div>
             )}
           </div>
         </ul>
