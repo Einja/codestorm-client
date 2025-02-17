@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="p-4">
+    <footer className="p-4 mt-10 md:mt-0">
       <hr
         className="w-1/4 mx-auto my-10"
         style={{ borderColor: "var(--text-color)" }}
