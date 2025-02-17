@@ -4,7 +4,7 @@ import ProblemContainer from "./components/ProblemContainer";
 
 export default function Page() {
   return (
-    <div className="">
+    <div className="fade-in">
       <div className="conatiner mb-20">
         <h1 className="text-left max-w-lg text-4xl">Problems</h1>
       </div>

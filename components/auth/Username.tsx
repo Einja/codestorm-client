@@ -43,8 +43,14 @@ const Username: React.FC<UsernameProps> = ({ username }) => {
         {<div className="hover:text-gray-300">{username}</div>}
       </button>
       {showDropdown && (
-        <div className="absolute mt-2 w-32 bg-black rounded-lg py-1 shadow-xl">
-          <a href="/users/username" className="block px-4 py-1 hover:text-gray-300">
+        <div
+          className="absolute mt-2 w-32 rounded-lg py-1 shadow-xl"
+          style={{ backgroundColor: "var(--background-color2)", color: "var(--text-color)"}}
+        >
+          <a
+            href={`/users/${username}`}
+            className="block px-4 py-1 hover:text-gray-300"
+          >
             Profile
           </a>
           <button

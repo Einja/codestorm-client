@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      
       <head>
+      <link rel="icon" type="image/x-icon" href="/favicons/logo.png"></link>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body style={{ backgroundColor: "var(--background-color)" }}>

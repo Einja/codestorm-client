@@ -44,10 +44,10 @@ const Hero: React.FC = () => {
 
       <div className="mt-10 md:mt-0">
         <Image
-          src="images/hierarchical.svg"
+          src="images/logo.svg"
           alt="Coding topics flowchart"
-          width={450}
-          height={450}
+          width={700}
+          height={700}
           className="rounded-lg shadow-lg animate-swing shadow-none"
         />
       </div>
