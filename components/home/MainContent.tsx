@@ -22,7 +22,7 @@ const MainContent: React.FC = () => {
             </Link>
           </div>
 
-          <div className="flex justify-center items-center p-4 rounded-xl text-white w-1/2 h-3/4">
+          <div className="flex justify-center items-center p-4 rounded-xl w-1/2 h-3/4 mt-4 md:mt-0">
             <Image
               width={500}
               height={450}
