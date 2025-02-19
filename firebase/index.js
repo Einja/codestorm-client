@@ -7,7 +7,13 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -81,4 +87,22 @@ const readProblems = async () => {
   return problems;
 };
 
-export { readProblems };
+const readProblemSingular = async (id) => {
+  const docRef = doc(db, "problems", id);
+  const docSnap = await getDoc(docRef);
+  const data = docSnap.data();
+  return {
+    id: docSnap.id,
+    constraints: data.constraints,
+    description: data.description,
+    difficulty: data.difficulty,
+    examples: new Map(Object.entries(data.examples || {})),
+    inputs: new Map(Object.entries(data.inputs || {})),
+    memoryLimit: data.memoryLimit,
+    name: data.name,
+    output: data.output,
+    runtimeLimit: data.runtimeLimit,
+    tags: data.tags || [],
+  };
+};
+export { readProblems, readProblemSingular };
