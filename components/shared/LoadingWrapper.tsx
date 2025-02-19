@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { listenForAuthChanges } from "../../firebase/index";
 import { User } from "firebase/auth";
 import Navbar from "./Navbar";
@@ -11,7 +12,8 @@ interface LoadingWrapperProps {
 
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  
 
   useEffect(() => {
     const unsubscribe = listenForAuthChanges((user: User | null) => {
@@ -22,15 +24,26 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  // boolean that is true/false based on whether user is on problems page or not.
+  const pathname = usePathname();
+  const [hide, setHide] = useState<boolean>(true);
+  useEffect(() => {
+    setHide(!(pathname.startsWith("/problems/") && pathname !== "/problems"));
+  }, [pathname]);
+
   if (loading) {
-    return <div className="flex h-screen justify-center items-center text-6xl"><p>Loading...</p></div>;
+    return (
+      <div className="flex h-screen justify-center items-center text-6xl">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
     <>
       <Navbar />
       <main className="container mx-auto mt-8 mb-8">{children}</main>
-      <Footer />
+      {hide && <Footer />}
     </>
   );
 };

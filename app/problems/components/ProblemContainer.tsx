@@ -1,13 +1,30 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { readProblems } from "../../../firebase/index";
 import { useRouter } from "next/navigation";
 import ProblemCard from "./ProblemCard";
 
+interface Problem {
+  id: string;
+  name: string;
+  difficulty: number;
+}
+
 const ProblemContainer: React.FC = () => {
+  const [problems, setProblems] = useState<Problem[]>([]);
   const router = useRouter();
   const handleProblemClick = (id: string): void => {
     router.push(`/problems/${id}`);
   };
+
+  useEffect(() => {
+    const fetchProblems = async () => {
+      const data = await readProblems();
+      setProblems(data);
+    };
+
+    fetchProblems();
+  }, []);
   return (
     <div className="bg-gray-500 p-6 mx-3 rounded-md text-white overflow-x-auto no-scrollbar">
       <table className="w-full bg-black shadow-md">
@@ -19,18 +36,15 @@ const ProblemContainer: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          <ProblemCard
-            id={"1A"}
-            name={"watermelon"}
-            difficulty={500}
-            onClick={() => handleProblemClick("1A")}
-          />
-          <ProblemCard
-            id={"2A"}
-            name={"Two Sum"}
-            difficulty={800}
-            onClick={() => handleProblemClick("2A")}
-          />
+          {problems.map((problem) => (
+            <ProblemCard
+              key={problem.id}
+              id={problem.id}
+              name={problem.name}
+              difficulty={problem.difficulty}
+              onClick={() => handleProblemClick(problem.id)}
+            />
+          ))}
         </tbody>
       </table>
     </div>

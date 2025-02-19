@@ -20,7 +20,7 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
       if (error instanceof Error) {
         setError("Failed to login. Incorrect email/password.");
       } else {
-        setError(`unknown error occurred.`);
+        setError(`Unknown error occurred.`);
       }
     }
   };

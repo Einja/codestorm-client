@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from 'next/navigation';
 import { logout } from "../../firebase/index";
 
 interface UsernameProps {
@@ -9,11 +10,12 @@ interface UsernameProps {
 const Username: React.FC<UsernameProps> = ({ username }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+  const router = useRouter();
   const handleLogout = async () => {
     try {
       await logout();
       window.location.reload();
+      router.push('/');
     } catch (error) {
       console.error("Logout failed.");
     }

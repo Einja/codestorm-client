@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BrowserRouter } from "react-router-dom";
 import LoadingWrapper from "../components/shared/LoadingWrapper";
 import "./globals.css";
 

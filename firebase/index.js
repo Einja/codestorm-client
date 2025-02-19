@@ -5,9 +5,9 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "firebase/auth";
-
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,10 +19,10 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
+const db = getFirestore(app);
+//******************** AUTHENTICATION ********************//
 const signUp = async (username, email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -66,4 +66,19 @@ const logout = async () => {
 const listenForAuthChanges = (callback) => {
   return onAuthStateChanged(auth, callback);
 };
+
 export { auth, signUp, login, logout, listenForAuthChanges };
+
+//******************** FIRESTORE ********************//
+
+const readProblems = async () => {
+  const collectionRef = collection(db, "problems");
+  const querySnapshot = await getDocs(collectionRef);
+  const problems = querySnapshot.docs.map((doc) => {
+    const data = doc.data();
+    return { id: doc.id, name: data.name, difficulty: data.difficulty };
+  });
+  return problems;
+};
+
+export { readProblems };
