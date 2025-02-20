@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { readProblems } from "../../../firebase/index";
+import { readProblemSummaries } from "../../../firebase/index";
 import { useRouter } from "next/navigation";
 import ProblemCard from "./ProblemCard";
 
@@ -18,12 +18,12 @@ const ProblemContainer: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchProblems = async () => {
-      const data = await readProblems();
+    const fetchProblemSummaries = async () => {
+      const data = await readProblemSummaries();
       setProblems(data);
     };
 
-    fetchProblems();
+    fetchProblemSummaries();
   }, []);
   return (
     <div className="bg-gray-500 p-6 mx-3 rounded-md text-white overflow-x-auto no-scrollbar">

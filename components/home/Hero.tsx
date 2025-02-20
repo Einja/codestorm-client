@@ -23,10 +23,10 @@ const Hero: React.FC = () => {
     setShowLogin(!showLogin);
   };
   return (
-    <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
-      <div className="text-left max-w-lg">
-        <h1 className="text-6xl mb-4 text-center">CodeStorm</h1>
-        <p className="text-2xl flex items-center text-center">
+    <div className="container mx-auto flex flex-col items-center justify-between">
+      <div className="md:w-1/2 py-10 text-center">
+        <h1 className="text-6xl mb-4">CodeStorm</h1>
+        <p className="text-2xl">
           The #1 modern day competitive programming and technical interview
           preparation platform.
         </p>
@@ -42,12 +42,12 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-10 md:mt-0">
+      <div className="md:w-1/2 flex justify-center p-10">
         <Image
-          src="images/logo.svg"
+          src="/images/logo.png"
           alt="Coding topics flowchart"
-          width={700}
-          height={700}
+          width={450}
+          height={450}
           className="rounded-lg shadow-lg animate-swing shadow-none"
         />
       </div>

@@ -28,6 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
 //******************** AUTHENTICATION ********************//
 const signUp = async (username, email, password) => {
   try {
@@ -76,8 +77,7 @@ const listenForAuthChanges = (callback) => {
 export { auth, signUp, login, logout, listenForAuthChanges };
 
 //******************** FIRESTORE ********************//
-
-const readProblems = async () => {
+const readProblemSummaries = async () => {
   const collectionRef = collection(db, "problems");
   const querySnapshot = await getDocs(collectionRef);
   const problems = querySnapshot.docs.map((doc) => {
@@ -105,4 +105,4 @@ const readProblemSingular = async (id) => {
     tags: data.tags || [],
   };
 };
-export { readProblems, readProblemSingular };
+export { readProblemSummaries, readProblemSingular };

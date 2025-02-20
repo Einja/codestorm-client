@@ -13,7 +13,6 @@ interface LoadingWrapperProps {
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  
 
   useEffect(() => {
     const unsubscribe = listenForAuthChanges((user: User | null) => {
@@ -26,9 +25,11 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
 
   // boolean that is true/false based on whether user is on problems page or not.
   const pathname = usePathname();
-  const [hide, setHide] = useState<boolean>(true);
+  const [atProblems, setAtProblems] = useState<boolean>(true);
   useEffect(() => {
-    setHide(!(pathname.startsWith("/problems/") && pathname !== "/problems"));
+    setAtProblems(
+      !(pathname.startsWith("/problems/") && pathname !== "/problems")
+    );
   }, [pathname]);
 
   if (loading) {
@@ -41,9 +42,14 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
 
   return (
     <>
-      <Navbar />
-      <main className="container mx-auto mt-8 mb-8">{children}</main>
-      {hide && <Footer />}
+        <Navbar />
+        {atProblems ? (
+          <main className="container mx-auto mt-8 mb-8">{children}</main>
+        ) : (
+          <main className="flex">{children}</main>
+        )}
+        {atProblems && <Footer />}
+      
     </>
   );
 };
