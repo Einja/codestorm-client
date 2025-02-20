@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { readProblemSingular } from "../../../../firebase/index";
-import katex from "katex";
+
 interface ProblemProps {
   id: string;
 }
@@ -21,8 +21,6 @@ interface ProblemAttributes {
 }
 const Problem: React.FC<ProblemProps> = ({ id }) => {
   const [problem, setProblems] = useState<ProblemAttributes>();
-  const runtimeLimitRef = useRef<HTMLSpanElement>(null);
-  const memoryLimitRef = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     const fetchProblem = async () => {
       const data = await readProblemSingular(id);
@@ -33,12 +31,6 @@ const Problem: React.FC<ProblemProps> = ({ id }) => {
     fetchProblem();
   }, []);
 
-  useEffect(() => {
-    if (problem && memoryLimitRef.current && runtimeLimitRef.current) {
-      katex.render(problem.memoryLimit, memoryLimitRef.current);
-      katex.render(problem.memoryLimit, runtimeLimitRef.current);
-    }
-  }, [problem]);
 
 
   if (!problem) {
@@ -50,10 +42,10 @@ const Problem: React.FC<ProblemProps> = ({ id }) => {
         Problem {id}: {problem.name}
       </div>
       <div className="flex justify-center">
-        Runtime Limit: <span ref={runtimeLimitRef} className="ml-2"></span>
+        Runtime Limit: {problem.runtimeLimit}
       </div>
       <div className="flex justify-center">
-        Memory Limit: <span ref={memoryLimitRef} className="ml-2"></span>
+        Memory Limit: {problem.memoryLimit}
       </div>
       <div className="p-5">{problem.description}</div>
     </div>
