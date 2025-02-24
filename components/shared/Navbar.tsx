@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
       style={{
         backgroundColor: "var(--background-color2)",
         transition: "background-color 0.3s, color 0.3s",
-        zIndex: 100
+        zIndex: 100,
       }}
     >
       <div className="container mx-auto max-w-7xl flex justify-between items-center">
@@ -63,23 +63,28 @@ const Navbar: React.FC = () => {
           </li>
         </ul>
 
-        <ul className="flex space-x-8">
-          <Link href="/about" className="hover:text-gray-300">
-            {onSmallScreen ? <FaQuestion /> : "About"}
-          </Link>
-          <div className="hover:text-gray-300">
-            <ToggleTheme />
-          </div>
-
-          <div>
-            {user ? (
-              <Username username={user.displayName} />
-            ) : (
-              <div className="hover:text-gray-300">
-                <button onClick={handleLoginClick}>Sign In</button>
-              </div>
-            )}
-          </div>
+        <ul className="flex space-x-8 items-center">
+          <li>
+            <Link href="/about" className="hover:text-gray-300">
+              {onSmallScreen ? <FaQuestion /> : "About"}
+            </Link>
+          </li>
+          <li>
+            <div className="hover:text-gray-300">
+              <ToggleTheme />
+            </div>
+          </li>
+          <li>
+            <div>
+              {user ? (
+                <Username username={user.displayName} />
+              ) : (
+                <div className="hover:text-gray-300">
+                  <button onClick={handleLoginClick} className="text-sm sm:text-base">Sign In</button>
+                </div>
+              )}
+            </div>
+          </li>
         </ul>
       </div>
       {showLogin && (

@@ -15,7 +15,7 @@ const ToggleTheme: React.FC = () => {
 
   return (
 
-    <button onClick={toggleTheme}>
+    <button onClick={toggleTheme} className="flex items-center justify-center">
       {onSmallScreen ? (
         theme === "dark" ? <FaMoon /> : <FaSun/>
       ) : (

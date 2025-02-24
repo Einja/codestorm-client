@@ -20,7 +20,7 @@ const ExploreFeature: React.FC = () => {
             Get Started
           </Link>
         </div>
-        <div className="md:w-1/2 py-10 flex justify-center">
+        <div className="md:w-1/2 my-10 flex justify-center">
           <div className="relative w-full max-w-[500px]">
             <Image
               className="rounded-lg w-full h-auto"
