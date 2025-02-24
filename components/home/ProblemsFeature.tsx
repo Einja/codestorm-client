@@ -7,7 +7,7 @@ const ProblemsFeature: React.FC = () => {
       <div className="flex flex-col md:flex-row items-center justify-between h-96 mb-10 md:mb-0">
         <div className="md:w-1/2 py-10 text-center justify-center">
           <h2 className="text-4xl mb-4">Questions</h2>
-          <p className="mb-4">FILLER</p>
+          <p className="mb-4">Our questions are crafted to accelerate your learning as a beginner and sharpen your skills like a pro.</p>
           {/*absolute -translate-x-1/2 ensures that the button doesn't bump the text above upwards, and that button is in center.*/}
           <Link
             href="/problems"
@@ -20,7 +20,7 @@ const ProblemsFeature: React.FC = () => {
 
         <div className="md:w-1/2 py-10 text-center">
           <h2 className="text-4xl mb-4">Over 14+ Languages</h2>
-          <p className="mb-4">FILLER</p>
+          <p className="mb-4">Solve problems in your favorite language! We support over 14+ programming languages, so you can practice the way you code best.</p>
         </div>
       </div>
     </div>

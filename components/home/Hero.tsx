@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
           alt="Coding topics flowchart"
           width={450}
           height={450}
-          className="rounded-lg shadow-lg animate-swing shadow-none"
+          className="rounded-lg animate-swing"
         />
       </div>
       {showLogin && (

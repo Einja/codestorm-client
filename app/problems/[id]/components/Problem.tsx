@@ -37,14 +37,14 @@ const Problem: React.FC<ProblemProps> = ({ id }) => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="w-1/2 rounded-lg border border-gray-500 overflow-hidden bg-[#343541] text-white mx-2 overflow-y-auto ">
-      <div className="p-5 flex justify-center">
+    <div className="h-screen rounded-lg overflow-hidden border border-gray-500 bg-[#343541] text-white mx-2">
+      <div className="p-5 text-center">
         Problem {id}: {problem.name}
       </div>
-      <div className="flex justify-center">
+      <div className="text-center">
         Runtime Limit: {problem.runtimeLimit}
       </div>
-      <div className="flex justify-center">
+      <div className="text-center">
         Memory Limit: {problem.memoryLimit}
       </div>
       <div className="p-5">{problem.description}</div>

@@ -26,8 +26,8 @@ const ProblemContainer: React.FC = () => {
     fetchProblemSummaries();
   }, []);
   return (
-    <div className="bg-gray-500 p-6 mx-3 rounded-md text-white overflow-x-auto no-scrollbar">
-      <table className="w-full bg-black shadow-md">
+    <div className="bg-gray-500 p-6 mx-3 rounded-lg text-white overflow-x-auto no-scrollbar">
+      <table className="w-full shadow-xl rounded-lg overflow-hidden">
         <thead className="bg-gray-600">
           <tr>
             <th className="text-xl p-4">ID</th>

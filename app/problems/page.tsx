@@ -8,11 +8,11 @@ export default function Page() {
       <div className="conatiner mb-20">
         <h1 className="text-left max-w-lg text-4xl">Problems</h1>
       </div>
-      <div className="grid grid-cols-10 gap-4">
-        <div className="col-span-7">
+      <div className="flex flex-col md:flex-row">
+        <div className="py-4 w-full md:w-2/3">
           <ProblemContainer />
         </div>
-        <div className="col-span-3">
+        <div className="py-4 w-full md:w-1/3">
           <DifficultyFilter />
         </div>
       </div>

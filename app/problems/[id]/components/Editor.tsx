@@ -18,7 +18,7 @@ public:
     }
   };
   return (
-    <div className="w-1/2 rounded-lg border border-gray-500 overflow-hidden bg-[#343541] text-white mx-2">
+    <div className="h-screen rounded-lg border border-gray-500 overflow-hidden bg-[#343541] text-white mx-2">
       <div className="p-2">Code</div>
       <LanguageDropdown />
       <MonacoEditor

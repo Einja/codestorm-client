@@ -15,21 +15,22 @@ const ExploreFeature: React.FC = () => {
           <Link
             href="/explore"
             scroll={false}
-            className="absolute -translate-x-1/2 mt-8 bg-blue-500 text-white py-2 px-4 rounded transition-colors duration-200 hover:bg-blue-600"
+            className="mt-8 bg-blue-500 text-white py-3 px-5 rounded transition-colors duration-200 hover:bg-blue-600"
           >
             Get Started
           </Link>
         </div>
-
-        <div className="md:w-1/2 flex justify-center">
-          <Image
-            width={500}
-            height={450}
-            className="rounded-lg"
-            unoptimized={true}
-            src={"/images/graph.gif"}
-            alt="DSA GIF"
-          />
+        <div className="md:w-1/2 py-10 flex justify-center">
+          <div className="relative w-full max-w-[500px]">
+            <Image
+              className="rounded-lg w-full h-auto"
+              width={500}
+              height={500}
+              unoptimized={true}
+              src={"/images/graph.gif"}
+              alt="DSA GIF"
+            />
+          </div>
         </div>
       </div>
     </div>
