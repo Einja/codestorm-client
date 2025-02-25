@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 import { FaAngleDown } from "react-icons/fa6";
 const LanguageDropdown: React.FC = () => {
   return (
-    <div className="p-2 flex items-center gap-1">C++ <FaAngleDown/></div>
-  )
-}
+    <button className="p-2 hover:bg-gray-600 rounded-lg transition-colors duration-200 transition:0.3s">
+      <div className="flex items-start items-center">
+        C++ <FaAngleDown />
+      </div>
+    </button>
+  );
+};
 
-export default LanguageDropdown
+export default LanguageDropdown;

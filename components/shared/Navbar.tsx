@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
       style={{
         backgroundColor: "var(--background-color2)",
         transition: "background-color 0.3s, color 0.3s",
-        zIndex: 100,
+        zIndex: 5,
       }}
     >
       <div className="container mx-auto max-w-7xl flex justify-between items-center">

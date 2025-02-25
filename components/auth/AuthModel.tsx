@@ -15,7 +15,7 @@ const AuthModel: React.FC<AuthModelProps> = ({ onClose , displayCreateAccount })
     setToggleLogin(!toggleLogin);
   };
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10 font-8Bit">
       <div className="bg-white p-10 rounded-lg relative w-96">
         <button
           className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"

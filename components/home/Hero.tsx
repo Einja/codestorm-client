@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
   return (
     <div className="container mx-auto flex flex-col items-center justify-between">
       <div className="md:w-1/2 py-10 text-center">
-        <h1 className="text-6xl mb-4">CodeStorm</h1>
+        <h1 className="text-8xl mb-4">CodeStorm</h1>
         <p className="text-2xl">
           The #1 modern day competitive programming and technical interview
           preparation platform.
