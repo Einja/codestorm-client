@@ -23,7 +23,7 @@ export default function ProblemPage({ params }: { params: Promise<Params> }) {
         </div>
       </div>
       <div className="min-h-screen md:w-1/2">
-        <div className="h-full">
+        <div className="h-screen">
           <div className="h-2/3 py-2 pl-2 md:pl-0 pr-2">
             <Editor id={param.id} />
           </div>
