@@ -1,6 +1,11 @@
 import React from "react";
 
-const TestCases: React.FC = () => {
+interface TestCasesProps {
+  code: string;
+}
+
+const TestCases: React.FC<TestCasesProps> = ({ code }) => {
+  const handleSubmitClick = (code: string) => {console.log(code)};
   return (
     <div className="h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
       <div>
@@ -10,7 +15,10 @@ const TestCases: React.FC = () => {
             <button className="h-10 px-4 mr-3 bg-gray-500 transition-colors duration-200 hover:bg-gray-600 rounded-lg">
               Run
             </button>
-            <button className="h-10 px-4 bg-green-500 transition-colors duration-200 hover:bg-green-700 rounded-lg">
+            <button
+              className="h-10 px-4 bg-green-500 transition-colors duration-200 hover:bg-green-700 rounded-lg"
+              onClick={() => handleSubmitClick(code)}
+            >
               Submit
             </button>
           </div>

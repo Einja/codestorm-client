@@ -6,6 +6,8 @@ import MonacoEditor from "@monaco-editor/react";
 
 interface EditorProps {
   id: string;
+  code: string;
+  setCode: (code: string) => void;
 }
 
 interface ProblemAttributes {
@@ -22,7 +24,7 @@ interface ProblemAttributes {
   tags: Array<string>;
 }
 
-const Editor: React.FC<EditorProps> = ({ id }) => {
+const Editor: React.FC<EditorProps> = ({ id, code, setCode }) => {
   const [problem, setProblems] = useState<ProblemAttributes>();
   useEffect(() => {
     const fetchProblem = async () => {
@@ -32,8 +34,6 @@ const Editor: React.FC<EditorProps> = ({ id }) => {
 
     fetchProblem();
   }, []);
-
-  const [code, setCode] = useState<string>("");
 
   useEffect(() => {
     if (problem) {
