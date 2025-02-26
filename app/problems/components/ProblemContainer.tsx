@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { readProblemSummaries } from "../../../firebase/index";
+import { readProblemSummaries } from "@/backend/firebase/database";
 import { useRouter } from "next/navigation";
 import ProblemCard from "./ProblemCard";
 

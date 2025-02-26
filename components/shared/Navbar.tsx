@@ -4,7 +4,7 @@ import Link from "next/link";
 import ToggleTheme from "./ToggleTheme";
 import Username from "../auth/Username";
 import AuthModel from "../auth/AuthModel";
-import { listenForAuthChanges } from "../../firebase/index";
+import { listenForAuthChanges } from "@/backend/firebase/auth/index";
 import { User } from "firebase/auth";
 import {
   FaHouse,

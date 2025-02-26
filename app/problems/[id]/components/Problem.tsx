@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { readProblemSingular } from "../../../../firebase/index";
+import { readProblemSingular } from "@/backend/firebase/database/index";
 
 interface ProblemProps {
   id: string;

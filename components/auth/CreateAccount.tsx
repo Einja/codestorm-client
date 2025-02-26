@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { signUp } from "../../firebase/index";
+import { signUp } from "@/backend/firebase/auth/index";
 interface CreateAccountProps {
   switchAuthDisplay: () => void;
 }

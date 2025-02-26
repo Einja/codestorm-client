@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { listenForAuthChanges } from "../../firebase/index";
+import { listenForAuthChanges } from "@/backend/firebase/auth/index";
 import { User } from "firebase/auth";
 import Navbar from "./Navbar";
 import Footer from "./Footer";

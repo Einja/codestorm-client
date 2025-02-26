@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from 'next/navigation';
-import { logout } from "../../firebase/index";
+import { logout } from "@/backend/firebase/auth/index";
 
 interface UsernameProps {
   username: string | null;

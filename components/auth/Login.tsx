@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { login } from "../../firebase/index";
+import { login } from "@/backend/firebase/auth/index";
 
 interface LoginProps {
   switchAuthDisplay: () => void;
