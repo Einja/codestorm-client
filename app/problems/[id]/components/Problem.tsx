@@ -12,7 +12,7 @@ interface ProblemAttributes {
   description: string;
   difficulty: number;
   examples: Map<string, string>;
-  inputs: Map<string, string>;
+  inputs: Array<string>;
   memoryLimit: string;
   name: string;
   output: string;
@@ -31,23 +31,26 @@ const Problem: React.FC<ProblemProps> = ({ id }) => {
     fetchProblem();
   }, []);
 
-
-
   if (!problem) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="h-screen rounded-lg overflow-hidden border border-gray-500 bg-[#343541] text-white mx-2">
+    <div className="h-screen rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
       <div className="p-5 text-center">
         Problem {id}: {problem.name}
       </div>
-      <div className="text-center">
-        Runtime Limit: {problem.runtimeLimit}
-      </div>
-      <div className="text-center">
-        Memory Limit: {problem.memoryLimit}
-      </div>
+      <div className="text-center">Runtime Limit: {problem.runtimeLimit}</div>
+      <div className="text-center">Memory Limit: {problem.memoryLimit}</div>
       <div className="p-5">{problem.description}</div>
+      <div className="p-5">
+        {Array.from(problem.examples.entries()).map(([key, value], index) => (
+          <div key={index} className="py-5">
+            <div className="font-bold">Example {index + 1}:</div>
+            <div className="px-5">Input: {key}</div>
+            <div className="px-5">Output: {value}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

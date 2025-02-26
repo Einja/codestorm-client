@@ -30,7 +30,7 @@ const readProblemSingular = async (id) => {
     description: data.description,
     difficulty: data.difficulty,
     examples: new Map(Object.entries(data.examples || {})),
-    inputs: new Map(Object.entries(data.inputs || {})),
+    inputs: data.inputs || [],
     memoryLimit: data.memoryLimit,
     name: data.name,
     output: data.output,

@@ -25,7 +25,7 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
 
   // boolean that is true/false based on whether user is on problems page or not.
   const pathname = usePathname();
-  const [atProblems, setAtProblems] = useState<boolean>(true);
+  const [notAtProblems, setAtProblems] = useState<boolean>(true);
   useEffect(() => {
     setAtProblems(
       !(pathname.startsWith("/problems/") && pathname !== "/problems")
@@ -43,13 +43,8 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
   return (
     <>
         <Navbar />
-        {atProblems ? (
-          <main className="container mx-auto mt-8 mb-8">{children}</main>
-        ) : (
-          <main className="flex">{children}</main>
-        )}
-        {atProblems && <Footer />}
-      
+        {notAtProblems ? <main className="container mx-auto mt-8 mb-8">{children}</main> : <main className="h-screen">{children}</main>}
+        {notAtProblems && <Footer />}
     </>
   );
 };

@@ -37,14 +37,13 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className="p-4 relative"
+      className="p-4 relative top-0 left-0 z-50 w-full"
       style={{
         backgroundColor: "var(--background-color2)",
-        transition: "background-color 0.3s, color 0.3s",
-        zIndex: 5,
+        transition: "background-color 0.3s, color 0.3s"
       }}
     >
-      <div className="container mx-auto max-w-7xl flex justify-between items-center">
+      <div className="w-full px-4 flex justify-between items-center">
         <ul className="flex space-x-8">
           <li>
             <Link href="/" className="hover:text-gray-300">
