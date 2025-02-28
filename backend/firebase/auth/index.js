@@ -1,4 +1,5 @@
 import { app } from "../index";
+import { addUserInfo } from "../database";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -22,6 +23,7 @@ const signUp = async (username, email, password) => {
     const user = userCredential.user;
 
     await updateProfile(user, { displayName: username });
+    await addUserInfo(user.uid, username, email);
     return user;
   } catch (error) {
     console.error("An error occurred while signing up.");
@@ -38,7 +40,7 @@ const login = async (email, password) => {
     );
     return userCredential.user;
   } catch (error) {
-    console.error("An error occurred while logging in.");
+    console.error("Incorrect username and/or password.");
     throw error;
   }
 };

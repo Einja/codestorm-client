@@ -42,10 +42,14 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
 
   return (
     <>
-        <Navbar />
-        {notAtProblems ? <main className="container mx-auto mt-8 mb-8">{children}</main> : <main className="h-screen">{children}</main>}
-        {notAtProblems && <Footer />}
-    </>
+      <Navbar />
+      {notAtProblems ? (
+        <main className="container mx-auto mt-8 mb-8">{children}</main>
+      ) : (
+        <main className="h-screen">{children}</main>
+      )}
+      {notAtProblems && <Footer />}
+   </>
   );
 };
 

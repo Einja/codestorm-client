@@ -24,7 +24,6 @@ const Problem: React.FC<ProblemProps> = ({ id }) => {
   useEffect(() => {
     const fetchProblem = async () => {
       const data = await readProblemSingular(id);
-      console.log(data);
       setProblems(data);
     };
 
@@ -35,7 +34,7 @@ const Problem: React.FC<ProblemProps> = ({ id }) => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="h-screen rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
+    <div className="h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
       <div className="p-5 text-center">
         Problem {id}: {problem.name}
       </div>

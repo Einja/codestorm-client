@@ -40,14 +40,14 @@ const Username: React.FC<UsernameProps> = ({ username }) => {
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative inline-block" ref={dropdownRef}>
       <button onClick={() => setShowDropdown(!showDropdown)}>
         {<div className="hover:text-gray-300">{username}</div>}
       </button>
       {showDropdown && (
         <div
-          className="absolute mt-2 w-32 rounded-lg py-1 shadow-xl"
-          style={{ backgroundColor: "var(--background-color2)", color: "var(--text-color)"}}
+          className="absolute right-0 mt-2 w-32 rounded-lg py-1 shadow-xl z-10"
+          style={{ backgroundColor: "var(--background-color2)", color: "var(--text-color)" }}
         >
           <a
             href={`/users/${username}`}

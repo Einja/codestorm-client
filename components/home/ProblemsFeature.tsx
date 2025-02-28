@@ -19,8 +19,8 @@ const ProblemsFeature: React.FC = () => {
         </div>
 
         <div className="md:w-1/2 py-10 text-center">
-          <h2 className="text-4xl mb-4">Over 14+ Languages</h2>
-          <p className="mb-4">Solve problems in your favorite language! We support over 14+ programming languages, so you can practice the way you code best.</p>
+          <h2 className="text-4xl mb-4">Python and C++</h2>
+          <p className="mb-4">Solve problems in Python and/or C++! We support the two most popular languages for technical interviews, so you can practice the way you code best.</p>
         </div>
       </div>
     </div>

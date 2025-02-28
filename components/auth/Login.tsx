@@ -26,12 +26,12 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
   };
   return (
     <div className="text-gray-700">
-      <h2 className="text-xl font-bold mb-4 text-center">Welcome Back</h2>
+      <h2 className="text-xl mb-4 text-center">Welcome Back</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
-          <p className="block text-sm font-bold mb-2">Email</p>
+          <p className="block text-sm mb-2">Email</p>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none"
+            className="font-normal shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -39,7 +39,7 @@ const Login: React.FC<LoginProps> = ({ switchAuthDisplay }) => {
           />
         </div>
         <div className="mb-6">
-          <p className="block text-sm font-bold mb-2">Password</p>
+          <p className="block text-sm mb-2">Password</p>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 focus:outline-none"
             type="password"

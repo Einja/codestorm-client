@@ -1,35 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "@/components/context/AuthContext";
 import Link from "next/link";
 import ToggleTheme from "./ToggleTheme";
 import Username from "../auth/Username";
 import AuthModel from "../auth/AuthModel";
-import { listenForAuthChanges } from "@/backend/firebase/auth/index";
-import { User } from "firebase/auth";
-import {
-  FaHouse,
-  FaMagnifyingGlass,
-  FaPencil,
-  FaQuestion,
-} from "react-icons/fa6";
+import { FaHouse, FaMagnifyingGlass, FaPencil, FaHeart } from "react-icons/fa6";
 import { useMediaQuery } from "react-responsive";
+
 const Navbar: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-
+  const user = useContext(UserContext);
   const onSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
-
-  useEffect(() => {
-    const unsubscribe = listenForAuthChanges((user: User | null) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleLoginClick = () => {
     setShowLogin(!showLogin);
@@ -40,7 +22,7 @@ const Navbar: React.FC = () => {
       className="p-4 relative top-0 left-0 z-50 w-full"
       style={{
         backgroundColor: "var(--background-color2)",
-        transition: "background-color 0.3s, color 0.3s"
+        transition: "background-color 0.3s, color 0.3s",
       }}
     >
       <div className="w-full px-4 flex justify-between items-center">
@@ -64,8 +46,8 @@ const Navbar: React.FC = () => {
 
         <ul className="flex space-x-8 items-center">
           <li>
-            <Link href="/about" className="hover:text-gray-300">
-              {onSmallScreen ? <FaQuestion /> : "About"}
+            <Link href="/support" className="hover:text-gray-300">
+              {onSmallScreen ? <FaHeart /> : "Support"}
             </Link>
           </li>
           <li>
@@ -79,7 +61,12 @@ const Navbar: React.FC = () => {
                 <Username username={user.displayName} />
               ) : (
                 <div className="hover:text-gray-300">
-                  <button onClick={handleLoginClick} className="text-sm sm:text-base">Sign In</button>
+                  <button
+                    onClick={handleLoginClick}
+                    className="text-sm sm:text-base"
+                  >
+                    Sign In
+                  </button>
                 </div>
               )}
             </div>

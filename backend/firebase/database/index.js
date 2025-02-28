@@ -4,12 +4,26 @@ import {
   collection,
   doc,
   getDoc,
+  setDoc,
   getDocs,
 } from "firebase/firestore";
 
 const db = getFirestore(app);
+//********************* USERS **********************//
+const addUserInfo = async (uid, username, email) => {
+    await setDoc(doc(db, "users", uid), {
+        username: username,
+        email: email,
+        isAdmin: false,
+        createdAt: new Date()
+    });
+}
 
-//******************** FIRESTORE ********************//
+export { addUserInfo }
+
+
+
+//******************** PROBLEMS ********************//
 const readProblemSummaries = async () => {
   const collectionRef = collection(db, "problems");
   const querySnapshot = await getDocs(collectionRef);
@@ -38,4 +52,17 @@ const readProblemSingular = async (id) => {
     tags: data.tags || [],
   };
 };
-export { readProblemSummaries, readProblemSingular };
+
+// input: problem (Problem struct)
+// output: none
+// purpose: adds a problem doc to the problems collection in the database
+async function addProblem(problem) {
+    try {
+      const docRef = doc(db, "problems", problem.id);
+      await setDoc(docRef, problem);
+      console.log(`Added problem ${problem.id} to collections`);
+    } catch (error) {
+      console.error("Error adding problem: ", error);
+    }
+  }
+export { readProblemSummaries, readProblemSingular, addProblem };
