@@ -1,13 +1,17 @@
 import React, { useState, useContext } from "react";
 import { handleSubmission } from "@/backend/api/judge0/handleSubmission";
 import { UserContext } from "@/components/context/AuthContext";
+import TestCases from "./console-components/TestCases";
+import Output from "./console-components/Output";
 
-interface TestCasesProps {
+interface ConsoleProps {
   code: string;
+  problemId: string;
+  problemInputs: Array<string>;
 }
 
-const TestCases: React.FC<TestCasesProps> = ({ code }) => {
-  const [activeTab, setActiveTab] = useState("testcases");
+const Console: React.FC<ConsoleProps> = ({ code, problemId, problemInputs }) => {
+  const [activeTab, setActiveTab] = useState<string>("testcases");
   const user = useContext(UserContext);
 
   const handleTabClick = (tab: string) => {
@@ -24,7 +28,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
     // console.log(output);
   };
   return (
-    <div className="h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
+    <div className="flex flex-col w-full h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
       <div>
         <div className="flex items-center justify-between p-2">
           <div className="font-bold px-2">Console</div>
@@ -65,8 +69,10 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
           </button>
         </div>
       </div>
+      {activeTab === "testcases" && <TestCases problemId={problemId} problemInputs={problemInputs}/>}
+      {activeTab === "output" && <Output />}
     </div>
   );
 };
 
-export default TestCases;
+export default Console;

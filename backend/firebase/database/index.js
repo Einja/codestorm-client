@@ -3,6 +3,8 @@ import {
   getFirestore,
   collection,
   doc,
+  query,
+  where,
   getDoc,
   setDoc,
   getDocs,
@@ -11,17 +13,15 @@ import {
 const db = getFirestore(app);
 //********************* USERS **********************//
 const addUserInfo = async (uid, username, email) => {
-    await setDoc(doc(db, "users", uid), {
-        username: username,
-        email: email,
-        isAdmin: false,
-        createdAt: new Date()
-    });
-}
+  await setDoc(doc(db, "users", uid), {
+    username: username,
+    email: email,
+    isAdmin: false,
+    createdAt: new Date(),
+  });
+};
 
-export { addUserInfo }
-
-
+export { addUserInfo };
 
 //******************** PROBLEMS ********************//
 const readProblemSummaries = async () => {
@@ -56,13 +56,23 @@ const readProblemSingular = async (id) => {
 // input: problem (Problem struct)
 // output: none
 // purpose: adds a problem doc to the problems collection in the database
-async function addProblem(problem) {
-    try {
-      const docRef = doc(db, "problems", problem.id);
-      await setDoc(docRef, problem);
-      console.log(`Added problem ${problem.id} to collections`);
-    } catch (error) {
-      console.error("Error adding problem: ", error);
-    }
+const addProblem = async (problem) => {
+  try {
+    const docRef = doc(db, "problems", problem.id);
+    await setDoc(docRef, problem);
+    console.log(`Added problem ${problem.id} to collections`);
+  } catch (error) {
+    console.error("Error adding problem: ", error);
   }
-export { readProblemSummaries, readProblemSingular, addProblem };
+};
+
+//******************* TESTCASES ********************//
+const readSampleTestcasesById = async (problemId) => {
+    const collectionRef = collection(db, "testcases");
+    const q = query(collectionRef, where('problemId', '==', problemId), where('sampleCase', '==', true));
+    const querySnapshot = await getDocs(q);
+    const data = querySnapshot.docs.map(doc => doc.data());
+    return data;
+}
+
+export { readProblemSummaries, readProblemSingular, addProblem, readSampleTestcasesById };

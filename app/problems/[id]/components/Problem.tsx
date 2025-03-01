@@ -1,9 +1,8 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { readProblemSingular } from "@/backend/firebase/database/index";
+import React from "react";
+import ProblemDesc from "./problem-components/ProblemDesc";
 
 interface ProblemProps {
-  id: string;
+  problem: ProblemAttributes;
 }
 
 interface ProblemAttributes {
@@ -19,28 +18,16 @@ interface ProblemAttributes {
   runtimeLimit: string;
   tags: Array<string>;
 }
-const Problem: React.FC<ProblemProps> = ({ id }) => {
-  const [problem, setProblems] = useState<ProblemAttributes>();
-  useEffect(() => {
-    const fetchProblem = async () => {
-      const data = await readProblemSingular(id);
-      setProblems(data);
-    };
-
-    fetchProblem();
-  }, []);
-
-  if (!problem) {
-    return <div>Loading...</div>;
-  }
+const Problem: React.FC<ProblemProps> = ({ problem }) => {
+  
   return (
     <div className="h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
       <div className="p-5 text-center">
-        Problem {id}: {problem.name}
+        Problem {problem.id}: {problem.name}
       </div>
       <div className="text-center">Runtime Limit: {problem.runtimeLimit}</div>
       <div className="text-center">Memory Limit: {problem.memoryLimit}</div>
-      <div className="p-5">{problem.description}</div>
+      <div className="p-5"><ProblemDesc desc={problem.description}/></div>
       <div className="p-5">
         {Array.from(problem.examples.entries()).map(([key, value], index) => (
           <div key={index} className="py-5">
