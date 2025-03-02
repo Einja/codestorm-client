@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { MathJaxContext } from "better-react-mathjax";
 import { readProblemSingular } from "@/backend/firebase/database/index";
+import { LanguageContextProvider } from "@/components/context/LanguageContext";
 import Editor from "./components/Editor";
 import Problem from "./components/Problem";
 import Console from "./components/Console";
@@ -43,33 +44,35 @@ export default function ProblemPage({ params }: { params: Promise<Params> }) {
     );
   }
   return (
-    <MathJaxContext>
-      <div
-        className="flex flex-col md:flex-row min-h-screen overflow-hidden font-sans"
-        style={{ letterSpacing: "0", fontWeight: "normal" }}
-      >
-        <div className="h-screen md:w-1/2">
-          <div className="h-full">
-            <div className="h-full px-2 pt-2 md:py-2">
-              <Problem problem={problem} />
+    <LanguageContextProvider>
+      <MathJaxContext>
+        <div
+          className="flex flex-col md:flex-row min-h-screen overflow-hidden font-sans"
+          style={{ letterSpacing: "0", fontWeight: "normal" }}
+        >
+          <div className="h-screen md:w-1/2">
+            <div className="h-full">
+              <div className="h-full px-2 pt-2 md:py-2">
+                <Problem problem={problem} />
+              </div>
+            </div>
+          </div>
+          <div className="h-screen md:w-1/2">
+            <div className="h-full">
+              <div className="h-2/3 py-2 pl-2 md:pl-0 pr-2">
+                <Editor id={problem.id} code={code} setCode={setCode} />
+              </div>
+              <div className="h-1/3 pb-2 pl-2 md:pl-0 pr-2">
+                <Console
+                  code={code}
+                  problemId={problem.id}
+                  problemInputs={problem.inputs}
+                />
+              </div>
             </div>
           </div>
         </div>
-        <div className="h-screen md:w-1/2">
-          <div className="h-full">
-            <div className="h-2/3 py-2 pl-2 md:pl-0 pr-2">
-              <Editor id={problem.id} code={code} setCode={setCode} />
-            </div>
-            <div className="h-1/3 pb-2 pl-2 md:pl-0 pr-2">
-              <Console
-                code={code}
-                problemId={problem.id}
-                problemInputs={problem.inputs}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </MathJaxContext>
+      </MathJaxContext>
+    </LanguageContextProvider>
   );
 }

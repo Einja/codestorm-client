@@ -1,8 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { handleRunCases } from "@/backend/api/judge0/handleRunCases";
 import { handleSubmission } from "@/backend/api/judge0/handleSubmission";
+import { LanguageContext } from "@/components/context/LanguageContext";
 import { UserContext } from "@/components/context/AuthContext";
 import TestCases from "./console-components/TestCases";
 import Output from "./console-components/Output";
+import { readSampleTestcasesById } from "@/backend/firebase/database";
+
+/*
+problemId: string,
+input: string[],
+expectedOutput: string,
+sampleCase: boolean
+*/
+interface SampleCaseAttributes {
+  problemId: string;
+  input: Array<string>;
+  expectedOutput: string;
+  sampleCase: boolean;
+}
 
 interface ConsoleProps {
   code: string;
@@ -10,23 +26,64 @@ interface ConsoleProps {
   problemInputs: Array<string>;
 }
 
-const Console: React.FC<ConsoleProps> = ({ code, problemId, problemInputs }) => {
+const Console: React.FC<ConsoleProps> = ({
+  code,
+  problemId,
+  problemInputs,
+}) => {
   const [activeTab, setActiveTab] = useState<string>("testcases");
   const user = useContext(UserContext);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
-  const handleSubmitClick = async (code: string) => {
+
+  const { language, setLanguage } = useContext(LanguageContext);
+
+  const handleRunClick = async (code: string, language: string) => {
+    console.log(`Code ran: ${code}`);
+    console.log(`Language Used: ${language}`);
+    // comment here to prevent breaking api limit every day...
+    // const output = await handleRunCases(code, language);
+    // console.log(output);
+  };
+
+  const handleSubmitClick = async (code: string, language: string) => {
     if (!user) {
       console.log("Please login to submit code!");
       return;
     }
     console.log("Success!");
     // comment here to prevent breaking api limit every day...
-    // const output = await handleSubmission(code);
+    // const output = await handleSubmission(code, language);
     // console.log(output);
   };
+  const [sampleCases, setSampleCases] = useState<SampleCaseAttributes[]>([]);
+
+  useEffect(() => {
+    const fetchSampleCases = async () => {
+      if (sampleCases.length === 0) {
+        const data = await readSampleTestcasesById(problemId);
+        const fdata = data.map((doc) => ({
+          problemId: doc.problemId,
+          input: doc.input,
+          expectedOutput: doc.expectedOutput,
+          sampleCase: doc.sampleCase,
+        }));
+        console.log(fdata);
+        setSampleCases(fdata);
+      }
+    };
+
+    fetchSampleCases();
+  }, []);
+
+  const handleCasesFromTestCases = (
+    casesFromTestCases: SampleCaseAttributes[]
+  ) => {
+    setSampleCases(casesFromTestCases);
+  };
+
   return (
     <div className="flex flex-col w-full h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
       <div>
@@ -35,13 +92,13 @@ const Console: React.FC<ConsoleProps> = ({ code, problemId, problemInputs }) => 
           <div>
             <button
               className="h-10 px-4 mr-3 bg-gray-500 transition-colors duration-200 hover:bg-gray-600 rounded-lg"
-              onClick={() => handleSubmitClick(code)}
+              onClick={() => handleRunClick(code, language)}
             >
               Run
             </button>
             <button
               className="h-10 px-4 bg-green-500 transition-colors duration-200 hover:bg-green-700 rounded-lg"
-              onClick={() => handleSubmitClick(code)}
+              onClick={() => handleSubmitClick(code, language)}
             >
               Submit
             </button>
@@ -69,7 +126,13 @@ const Console: React.FC<ConsoleProps> = ({ code, problemId, problemInputs }) => 
           </button>
         </div>
       </div>
-      {activeTab === "testcases" && <TestCases problemId={problemId} problemInputs={problemInputs}/>}
+      {activeTab === "testcases" && (
+        <TestCases
+          sampleCases={sampleCases}
+          onCaseChange={handleCasesFromTestCases}
+          problemInputs={problemInputs}
+        />
+      )}
       {activeTab === "output" && <Output />}
     </div>
   );

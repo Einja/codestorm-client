@@ -11,7 +11,7 @@ const languageToId = {
     "python": 92
 };
 
-const handleSubmission = async (code, language) => {
+const handleRunCases = async (code, language) => {
     const judgeCode = `
     #include <bits/stdc++.h>
     using namespace std;
@@ -49,4 +49,4 @@ const handleSubmission = async (code, language) => {
 }
 
 
-export { handleSubmission };
+export { handleRunCases };

@@ -8,15 +8,9 @@ interface ProblemDescProps {
 const ProblemDesc: React.FC<ProblemDescProps> = ({ desc }) => {
   return (
     <MathJax>
-      {desc
-        .split('\\n')
-        .map((paragraph, index) =>
-          paragraph.startsWith("-") ? (
-            <li key={index}>{paragraph.substring(2)}</li>
-          ) : (
-            <p key={index}>{paragraph}</p>
-          )
-        )}
+      {desc.split("\\n").map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+      ))}
     </MathJax>
   );
 };

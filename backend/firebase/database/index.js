@@ -34,6 +34,9 @@ const readProblemSummaries = async () => {
   return problems;
 };
 
+// input: id (string)
+// output: Problem struct
+// purpose: get the information and details about a single problem in the database for display on problem page.
 const readProblemSingular = async (id) => {
   const docRef = doc(db, "problems", id);
   const docSnap = await getDoc(docRef);

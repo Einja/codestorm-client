@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { LanguageContext } from "@/components/context/LanguageContext";
 import { readProblemSingular } from "@/backend/firebase/database/index";
-import LanguageDropdown from "./LanguageDropdown";
+import LanguageDropdown from "./editor-components/LanguageDropdown";
 import MonacoEditor from "@monaco-editor/react";
-
+import formatCodeTemplate from "./editor-components/EditorLayouts";
 interface EditorProps {
   id: string;
   code: string;
@@ -26,6 +27,8 @@ interface ProblemAttributes {
 
 const Editor: React.FC<EditorProps> = ({ id, code, setCode }) => {
   const [problem, setProblems] = useState<ProblemAttributes>();
+  const {language, setLanguage} = useContext(LanguageContext);
+
   useEffect(() => {
     const fetchProblem = async () => {
       const data = await readProblemSingular(id);
@@ -37,23 +40,11 @@ const Editor: React.FC<EditorProps> = ({ id, code, setCode }) => {
 
   useEffect(() => {
     if (problem) {
-      setCode(
-`class Solution {
-public:
-    ${problem.output} solution(${problem.inputs
-          .map((input, index) => {
-            const [varName, varType] = input.split(":");
-            return `${varType} ${varName}${
-              index < problem.inputs.length - 1 ? ", " : ""
-            }`;
-          })
-          .join("")}) {
-        
+      
+
+      setCode(formatCodeTemplate(language, problem));
     }
-};`
-      );
-    }
-  }, [problem]);
+  }, [problem, language]);
   const handleEditorChange = (value: string | undefined) => {
     if (value) {
       setCode(value);
@@ -65,7 +56,7 @@ public:
       <div className="p-2">Code</div>
       <LanguageDropdown />
       <MonacoEditor
-        language="cpp"
+        language={language}
         theme="vs-dark"
         value={code}
         options={{
