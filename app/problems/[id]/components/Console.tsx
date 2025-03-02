@@ -38,11 +38,22 @@ const Console: React.FC<ConsoleProps> = ({
     setActiveTab(tab);
   };
 
-  const { language, setLanguage } = useContext(LanguageContext);
+  const { language } = useContext(LanguageContext);
+
+  const [loading, setLoading] = useState(false);
+  const [showResult, setShowResult] = useState(false);
 
   const handleRunClick = async (code: string, language: string) => {
     console.log(`Code ran: ${code}`);
     console.log(`Language Used: ${language}`);
+    setShowResult(false);
+    setLoading(true);
+    setActiveTab("output");
+    setTimeout(() => {
+      setLoading(false);
+      setShowResult(true);
+    }, 2000);
+    // max(2000, min(x, 9999));
     // comment here to prevent breaking api limit every day...
     // const output = await handleRunCases(code, language);
     // console.log(output);
@@ -133,7 +144,13 @@ const Console: React.FC<ConsoleProps> = ({
           problemInputs={problemInputs}
         />
       )}
-      {activeTab === "output" && <Output />}
+      {activeTab === "output" && (
+        <Output
+          loading={loading}
+          showResult={showResult}
+          sampleCases={sampleCases}
+        />
+      )}
     </div>
   );
 };

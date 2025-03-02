@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { MathJaxContext } from "better-react-mathjax";
-import { readProblemSingular } from "@/backend/firebase/database/index";
+import { readProblemById } from "@/backend/firebase/database/index";
 import { LanguageContextProvider } from "@/components/context/LanguageContext";
 import Editor from "./components/Editor";
-import Problem from "./components/Problem";
+import ProblemDisplay from "./components/ProblemDisplay";
 import Console from "./components/Console";
 
 interface Params {
@@ -29,7 +29,7 @@ export default function ProblemPage({ params }: { params: Promise<Params> }) {
   const [problem, setProblems] = useState<ProblemAttributes | undefined>();
   useEffect(() => {
     const fetchProblem = async () => {
-      const data = await readProblemSingular(param.id);
+      const data = await readProblemById(param.id);
       setProblems(data);
     };
 
@@ -53,7 +53,7 @@ export default function ProblemPage({ params }: { params: Promise<Params> }) {
           <div className="h-screen md:w-1/2">
             <div className="h-full">
               <div className="h-full px-2 pt-2 md:py-2">
-                <Problem problem={problem} />
+                <ProblemDisplay problem={problem} />
               </div>
             </div>
           </div>

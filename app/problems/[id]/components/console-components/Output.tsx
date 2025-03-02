@@ -1,11 +1,34 @@
-import React from 'react'
-
-const Output: React.FC = () => {
-  return (
-    <div className="flex-1 overflow-y-auto">
-        
-    </div>
-  )
+import React from "react";
+import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
+import Result from "./output-components/Result";
+interface SampleCaseAttributes {
+  problemId: string;
+  input: Array<string>;
+  expectedOutput: string;
+  sampleCase: boolean;
 }
 
-export default Output
+interface OutputProps {
+  loading: boolean;
+  showResult: boolean;
+  sampleCases: Array<SampleCaseAttributes>;
+}
+
+const Output: React.FC<OutputProps> = ({
+  loading,
+  showResult,
+  sampleCases,
+}) => {
+  return (
+    <div>
+      {loading && (
+        <div className="h-full flex justify-center items-center">
+          <TailSpin />
+        </div>
+      )}
+      {showResult && <Result sampleCases={sampleCases} />}
+    </div>
+  );
+};
+
+export default Output;

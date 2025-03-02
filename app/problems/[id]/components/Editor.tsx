@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import { LanguageContext } from "@/components/context/LanguageContext";
-import { readProblemSingular } from "@/backend/firebase/database/index";
+import { readProblemById } from "@/backend/firebase/database/index";
 import LanguageDropdown from "./editor-components/LanguageDropdown";
 import MonacoEditor from "@monaco-editor/react";
 import formatCodeTemplate from "./editor-components/EditorLayouts";
@@ -31,7 +31,7 @@ const Editor: React.FC<EditorProps> = ({ id, code, setCode }) => {
 
   useEffect(() => {
     const fetchProblem = async () => {
-      const data = await readProblemSingular(id);
+      const data = await readProblemById(id);
       setProblems(data);
     };
 
