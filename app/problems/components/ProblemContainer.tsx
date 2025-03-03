@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { FilterContext } from "@/components/context/FilterContext";
 import { readProblemSummaries } from "@/backend/firebase/database";
 import { useRouter } from "next/navigation";
 import ProblemCard from "./ProblemCard";
@@ -11,6 +12,7 @@ interface Problem {
 }
 
 const ProblemContainer: React.FC = () => {
+  const { minDiff, maxDiff } = useContext(FilterContext);
   const [problems, setProblems] = useState<Problem[]>([]);
   const router = useRouter();
   const handleProblemClick = (id: string): void => {
@@ -36,15 +38,19 @@ const ProblemContainer: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {problems.map((problem) => (
-            <ProblemCard
-              key={problem.id}
-              id={problem.id}
-              name={problem.name}
-              difficulty={problem.difficulty}
-              onClick={() => handleProblemClick(problem.id)}
-            />
-          ))}
+          {problems.map((problem) => {
+            if (minDiff == "" || maxDiff == "" || (Number(minDiff) <= problem.difficulty && problem.difficulty <= Number(maxDiff))) {
+              return (
+                <ProblemCard
+                  key={problem.id}
+                  id={problem.id}
+                  name={problem.name}
+                  difficulty={problem.difficulty}
+                  onClick={() => handleProblemClick(problem.id)}
+                />
+              );
+            }
+          })}
         </tbody>
       </table>
     </div>

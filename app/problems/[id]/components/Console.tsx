@@ -6,7 +6,7 @@ import { UserContext } from "@/components/context/AuthContext";
 import TestCases from "./console-components/TestCases";
 import Output from "./console-components/Output";
 import { readSampleTestcasesById } from "@/backend/firebase/database";
-
+import { ToastContainer, toast, Flip } from "react-toastify";
 /*
 problemId: string,
 input: string[],
@@ -48,6 +48,7 @@ const Console: React.FC<ConsoleProps> = ({
   problemId,
   problemInputs,
 }) => {
+  const notAuth = () => toast.error("Please sign in to submit code!");
   const [activeTab, setActiveTab] = useState<string>("testcases");
   const user = useContext(UserContext);
 
@@ -64,7 +65,7 @@ const Console: React.FC<ConsoleProps> = ({
     compile_output: null,
     memory: 0,
     message: null,
-    status: {id: 0, description: ""},
+    status: { id: 0, description: "" },
     stderr: null,
     stdout: null,
     time: "",
@@ -101,23 +102,31 @@ const Console: React.FC<ConsoleProps> = ({
     language: string,
     sampleCases: SampleCaseAttributes[]
   ) => {
-    setShowResult(false);
-    setLoading(true);
-    setActiveTab("output");
-    setTimeout(() => {
+    try {
+      setShowResult(false);
+      setLoading(true);
+      setActiveTab("output");
+
+      const minWait = new Promise((resolve) => setTimeout(resolve, 3000));
+      const outputPromise = handleRunCases(code, language, sampleCases);
+      const [output] = await Promise.all([outputPromise, minWait]);
+
+      if (!output) {
+        console.error("Error: No output received from handleRunCases");
+        return;
+      }
+      setResult(output);
+    } catch (error) {
+      console.error("Error running cases:", error);
+    } finally {
       setLoading(false);
       setShowResult(true);
-    }, 4000);
-    // max(4000, min(x, 9999));
-    // comment here to prevent breaking api limit every day...
-    const output = await handleRunCases(code, language, sampleCases);
-    console.log(output);
-    setResult(output);
+    }
   };
 
   const handleSubmitClick = async (code: string, language: string) => {
     if (!user) {
-      console.log("Please login to submit code!");
+      notAuth();
       return;
     }
     console.log("Success!");
@@ -128,6 +137,18 @@ const Console: React.FC<ConsoleProps> = ({
 
   return (
     <div className="flex flex-col w-full h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="light"
+        transition={Flip}
+      />
       <div>
         <div className="flex items-center justify-between p-2">
           <div className="font-bold px-2">Console</div>

@@ -36,8 +36,8 @@ const handleRunCases = async (code, language, sampleCases) => {
     body: JSON.stringify({
       language_id: languageToId[language],
       source_code: judgeCode,
-      cpu_time_limit: 3,
-      memory_limit: 128000,
+      cpu_time_limit: 5,
+      memory_limit: 256000,
     }),
   };
 

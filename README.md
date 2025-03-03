@@ -4,14 +4,14 @@ CodeStorm is a work-in-progress project aimed at creating a simplified version o
 
 ## Features (To be added)
 
-- \*User authentication and profile management/metrics display
+- \*User authentication and profile metrics display
 - \*A collection of coding problems categorized by difficulty (500 - 2000). Each problem will have a runtime and memory limit described in big-O notation
 - \*Code editor with syntax highlighting
 - \*Real-time code execution and result display
 - \*Problem submission and solution tracking
 - Discussion forum
 - Contests with rewards and user ELO
-- Matchmaking and 1v1 system against other users
+- Matchmaking system against other users
   - Each player is given a list of problems that are around their intended ELO. Whoever solves all problems first or ends with the most points wins the match and gains ELO. The loser will lose ELO.
 
 \* Must be added by March.

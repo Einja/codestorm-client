@@ -36,8 +36,8 @@ const Result: React.FC<ResultProps> = ({ sampleCases, result }) => {
   };
 
   const statusAccept = result.status.description === "Accepted";
-  const resultOutput = result.stdout !== null ? result.stdout.split('\n') : [];
-  
+  const resultOutput = result.stdout !== null ? result.stdout.split("\n") : [];
+
   return (
     <div className="flex-1 overflow-y-auto">
       <div>
@@ -48,6 +48,13 @@ const Result: React.FC<ResultProps> = ({ sampleCases, result }) => {
         >
           {statusAccept ? "Compilation Successful" : result.status.description}
         </div>
+        {!statusAccept && result.stderr && (
+          <div className="group relative px-3 my-2 py-4 bg-[rgba(248,97,92,0.08)]">
+            <div className="align-middle px-4 text-sm text-red-500">
+              <pre>{result.stderr}</pre>
+            </div>
+          </div>
+        )}
         <div className="mx-3 my-4 flex flex-col space-y-4">
           <div className="flex w-full flex-row items-start justify-between gap-4">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-4">
@@ -79,7 +86,10 @@ const Result: React.FC<ResultProps> = ({ sampleCases, result }) => {
                       </div>
                     ))}
                     {statusAccept && (
-                      <div className="font-mono">{resultOutput.length > 0 && `Output: ${resultOutput[index]}`}</div>
+                      <div className="font-mono">
+                        {resultOutput.length > 0 &&
+                          `Output: ${resultOutput[index]}`}
+                      </div>
                     )}
                   </div>
                 )

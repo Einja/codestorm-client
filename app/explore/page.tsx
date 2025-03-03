@@ -4,6 +4,9 @@ import Card from "./components/Card";
 import useDragToScroll from "../../hooks/useDragtoScroll";
 
 export default function Page() {
+  const reroute = (link: string) => {
+    window.location.href = `https://${link}`;
+  }
   const scrollContainerRef = useDragToScroll();
   return (
     <div className="fade-in">
@@ -20,32 +23,38 @@ export default function Page() {
           <Card
             courseName="Arrays"
             courseDescription="Master the fundamentals of arrays, from traversal to advanced algorithms like sorting and searching."
-            cardColor="bg-indigo-700"
+            cardColor="bg-indigo-600"
+            redirect={() => reroute("www.leetcode.com/explore/learn/card/fun-with-arrays/")}
           />
           <Card
-            courseName="Strings"
-            courseDescription="Learn essential string manipulation techniques, pattern matching, and efficient algorithms for text processing."
-            cardColor="bg-blue-700"
+            courseName="Sorting"
+            courseDescription="Learn how to sort data using simple and powerful algorithms."
+            cardColor="bg-blue-600"
+            redirect={() => reroute("www.leetcode.com/explore/learn/card/sorting/")}
           />
           <Card
             courseName="Stacks/Queues"
             courseDescription="Explore these fundamental data structures for managing ordered data with LIFO and FIFO operations."
-            cardColor="bg-cyan-700"
+            cardColor="bg-cyan-600"
+            redirect={() => reroute("www.leetcode.com/explore/learn/card/queue-stack/")}
           />
           <Card
             courseName="Heaps"
             courseDescription="Understand priority queues and heap-based algorithms for efficient sorting and selection problems."
-            cardColor="bg-emerald-700"
+            cardColor="bg-emerald-600"
+            redirect={() => reroute("www.leetcode.com/explore/learn/card/heap/")}
           />
           <Card
             courseName="Linked Lists"
             courseDescription="Dive into linked lists, mastering traversal, insertion, deletion, and advanced linked structure techniques."
-            cardColor="bg-lime-700"
+            cardColor="bg-lime-600"
+            redirect={() => reroute("www.leetcode.com/explore/learn/card/linked-list/")}
           />
           <Card
             courseName="Graphs"
             courseDescription="Unlock the power of graphs with BFS, DFS, shortest paths, and topological sorting techniques."
-            cardColor="bg-yellow-700"
+            cardColor="bg-yellow-600"
+            redirect={() => reroute("www.leetcode.com/explore/learn/card/graph/")}
           />
         </div>
       </div>
