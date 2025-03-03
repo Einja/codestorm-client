@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Problem from "./problem-components/Problem";
-
+import Submissions from "./problem-components/Submissions"
 interface ProblemDisplayProps {
   problem: ProblemAttributes;
 }
@@ -49,6 +49,7 @@ const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem }) => {
       </div>
       <hr />
       {activeTab === "problem" && <Problem problem={problem} />}
+      {activeTab === "submissions" && <Submissions />}
     </div>
   );
 };

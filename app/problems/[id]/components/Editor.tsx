@@ -27,7 +27,7 @@ interface ProblemAttributes {
 
 const Editor: React.FC<EditorProps> = ({ id, code, setCode }) => {
   const [problem, setProblems] = useState<ProblemAttributes>();
-  const {language, setLanguage} = useContext(LanguageContext);
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchProblem = async () => {
@@ -40,8 +40,6 @@ const Editor: React.FC<EditorProps> = ({ id, code, setCode }) => {
 
   useEffect(() => {
     if (problem) {
-      
-
       setCode(formatCodeTemplate(language, problem));
     }
   }, [problem, language]);

@@ -9,6 +9,7 @@ sampleCase: boolean
 interface SampleCaseAttributes {
   problemId: string;
   input: Array<string>;
+  inputTypes: Array<string>;
   expectedOutput: string;
   sampleCase: boolean;
 }

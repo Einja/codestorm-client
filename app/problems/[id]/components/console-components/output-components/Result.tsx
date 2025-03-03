@@ -1,26 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface SampleCaseAttributes {
   problemId: string;
   input: Array<string>;
+  inputTypes: Array<string>;
   expectedOutput: string;
   sampleCase: boolean;
 }
 
-interface ResultProps {
-  sampleCases: Array<SampleCaseAttributes>;
+interface Status {
+  id: number;
+  description: string;
 }
 
-const Result: React.FC<ResultProps> = ({ sampleCases }) => {
+interface ResultAttributes {
+  compile_output: string | null;
+  memory: number;
+  message: string | null;
+  status: Status;
+  stderr: string | null;
+  stdout: string | null;
+  time: string;
+  token: string;
+}
+
+interface ResultProps {
+  sampleCases: Array<SampleCaseAttributes>;
+  result: ResultAttributes;
+}
+
+const Result: React.FC<ResultProps> = ({ sampleCases, result }) => {
   const [currentCase, setCurrentCase] = useState<number>(1);
   const handleCaseClick = (caseNum: number) => {
     setCurrentCase(caseNum);
   };
+
+  const statusAccept = result.status.description === "Accepted";
+  const resultOutput = result.stdout !== null ? result.stdout.split('\n') : [];
+  
   return (
     <div className="flex-1 overflow-y-auto">
       <div>
-        <div className="mx-7 text-emerald-400 font-bold">
-          Compilation Successful
+        <div
+          className={`mx-7 mt-3 font-bold ${
+            statusAccept ? "text-emerald-400" : "text-red-400"
+          }`}
+        >
+          {statusAccept ? "Compilation Successful" : result.status.description}
         </div>
         <div className="mx-3 my-4 flex flex-col space-y-4">
           <div className="flex w-full flex-row items-start justify-between gap-4">
@@ -44,7 +70,17 @@ const Result: React.FC<ResultProps> = ({ sampleCases }) => {
               (sampleCase, index) =>
                 currentCase === index + 1 && (
                   <div key={index}>
-                    Expected Output: {sampleCase.expectedOutput}
+                    {sampleCase.input.map((inputLine, ind) => (
+                      <div key={ind} className="py-2">
+                        <span className="font-mono">Input {ind + 1}:</span>
+                        <span className="rounded px-2 py-1 font-mono">
+                          {inputLine}
+                        </span>
+                      </div>
+                    ))}
+                    {statusAccept && (
+                      <div className="font-mono">{resultOutput.length > 0 && `Output: ${resultOutput[index]}`}</div>
+                    )}
                   </div>
                 )
             )}

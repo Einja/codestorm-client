@@ -16,8 +16,25 @@ sampleCase: boolean
 interface SampleCaseAttributes {
   problemId: string;
   input: Array<string>;
+  inputTypes: Array<string>;
   expectedOutput: string;
   sampleCase: boolean;
+}
+
+interface Status {
+  id: number;
+  description: string;
+}
+
+interface ResultAttributes {
+  compile_output: string | null;
+  memory: number;
+  message: string | null;
+  status: Status;
+  stderr: string | null;
+  stdout: string | null;
+  time: string;
+  token: string;
 }
 
 interface ConsoleProps {
@@ -42,34 +59,17 @@ const Console: React.FC<ConsoleProps> = ({
 
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
-
-  const handleRunClick = async (code: string, language: string) => {
-    console.log(`Code ran: ${code}`);
-    console.log(`Language Used: ${language}`);
-    setShowResult(false);
-    setLoading(true);
-    setActiveTab("output");
-    setTimeout(() => {
-      setLoading(false);
-      setShowResult(true);
-    }, 2000);
-    // max(2000, min(x, 9999));
-    // comment here to prevent breaking api limit every day...
-    // const output = await handleRunCases(code, language);
-    // console.log(output);
-  };
-
-  const handleSubmitClick = async (code: string, language: string) => {
-    if (!user) {
-      console.log("Please login to submit code!");
-      return;
-    }
-    console.log("Success!");
-    // comment here to prevent breaking api limit every day...
-    // const output = await handleSubmission(code, language);
-    // console.log(output);
-  };
   const [sampleCases, setSampleCases] = useState<SampleCaseAttributes[]>([]);
+  const [result, setResult] = useState<ResultAttributes>({
+    compile_output: null,
+    memory: 0,
+    message: null,
+    status: {id: 0, description: ""},
+    stderr: null,
+    stdout: null,
+    time: "",
+    token: "",
+  });
 
   useEffect(() => {
     const fetchSampleCases = async () => {
@@ -78,6 +78,7 @@ const Console: React.FC<ConsoleProps> = ({
         const fdata = data.map((doc) => ({
           problemId: doc.problemId,
           input: doc.input,
+          inputTypes: doc.inputTypes,
           expectedOutput: doc.expectedOutput,
           sampleCase: doc.sampleCase,
         }));
@@ -95,6 +96,36 @@ const Console: React.FC<ConsoleProps> = ({
     setSampleCases(casesFromTestCases);
   };
 
+  const handleRunClick = async (
+    code: string,
+    language: string,
+    sampleCases: SampleCaseAttributes[]
+  ) => {
+    setShowResult(false);
+    setLoading(true);
+    setActiveTab("output");
+    setTimeout(() => {
+      setLoading(false);
+      setShowResult(true);
+    }, 4000);
+    // max(4000, min(x, 9999));
+    // comment here to prevent breaking api limit every day...
+    const output = await handleRunCases(code, language, sampleCases);
+    console.log(output);
+    setResult(output);
+  };
+
+  const handleSubmitClick = async (code: string, language: string) => {
+    if (!user) {
+      console.log("Please login to submit code!");
+      return;
+    }
+    console.log("Success!");
+    // comment here to prevent breaking api limit every day...
+    // const output = await handleSubmission(code, language);
+    // console.log(output);
+  };
+
   return (
     <div className="flex flex-col w-full h-full rounded-lg overflow-y-auto border border-gray-500 bg-[#343541] text-white">
       <div>
@@ -103,7 +134,7 @@ const Console: React.FC<ConsoleProps> = ({
           <div>
             <button
               className="h-10 px-4 mr-3 bg-gray-500 transition-colors duration-200 hover:bg-gray-600 rounded-lg"
-              onClick={() => handleRunClick(code, language)}
+              onClick={() => handleRunClick(code, language, sampleCases)}
             >
               Run
             </button>
@@ -147,6 +178,7 @@ const Console: React.FC<ConsoleProps> = ({
       {activeTab === "output" && (
         <Output
           loading={loading}
+          result={result}
           showResult={showResult}
           sampleCases={sampleCases}
         />

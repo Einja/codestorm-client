@@ -1,3 +1,4 @@
+'use server';
 const url = "https://judge0-ce.p.rapidapi.com/submissions?wait=true";
 const apiKey = process.env.JUDGE0_API_KEY;
 
@@ -7,9 +8,9 @@ Python3 -> language_id = 92
 */
 
 const languageToId = {
-    "cpp": 76,
-    "python": 92
-};
+    cpp: 76,
+    python: 92,
+  };
 
 const handleSubmission = async (code, language) => {
     const judgeCode = `

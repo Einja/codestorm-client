@@ -1,29 +1,11 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { LanguageContext } from "@/components/context/LanguageContext";
 import { FaAngleDown } from "react-icons/fa6";
 
 const LanguageDropdown: React.FC = () => {
   const {language, setLanguage} = useContext(LanguageContext);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // clicking outside of the dropdown will close it. did a click occur outside of component?
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setShowDropdown(false);
-      }
-    };
   
-    // detects clicks outside of component.
-    useEffect(() => {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
   const handleLanguageToggle = (language: string) => {
     setLanguage(language);
     setShowDropdown(false);

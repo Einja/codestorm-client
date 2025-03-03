@@ -4,20 +4,37 @@ import Result from "./output-components/Result";
 interface SampleCaseAttributes {
   problemId: string;
   input: Array<string>;
+  inputTypes: Array<string>;
   expectedOutput: string;
   sampleCase: boolean;
 }
+interface Status {
+  id: number;
+  description: string;
+}
 
+interface ResultAttributes {
+  compile_output: string | null;
+  memory: number;
+  message: string | null;
+  status: Status;
+  stderr: string | null;
+  stdout: string | null;
+  time: string;
+  token: string;
+}
 interface OutputProps {
   loading: boolean;
   showResult: boolean;
   sampleCases: Array<SampleCaseAttributes>;
+  result: ResultAttributes;
 }
 
 const Output: React.FC<OutputProps> = ({
   loading,
   showResult,
   sampleCases,
+  result
 }) => {
   return (
     <div>
@@ -26,7 +43,7 @@ const Output: React.FC<OutputProps> = ({
           <TailSpin />
         </div>
       )}
-      {showResult && <Result sampleCases={sampleCases} />}
+      {showResult && <Result sampleCases={sampleCases} result={result} />}
     </div>
   );
 };
