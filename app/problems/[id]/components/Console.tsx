@@ -120,6 +120,7 @@ const Console: React.FC<ConsoleProps> = ({
         console.error("An unknown error occurred.");
         return;
       }
+      console.log(output);
       setConsoleResult(output);
     } catch (error) {
       console.error("Error running cases:", error);

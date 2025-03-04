@@ -49,9 +49,16 @@ const Result: React.FC<ResultProps> = ({ sampleCases, result }) => {
           {statusAccept ? "Compilation Successful" : result.status.description}
         </div>
         {!statusAccept && result.stderr && (
-          <div className="group relative px-3 my-2 py-4 bg-[rgba(248,97,92,0.08)]">
+          <div className="group relative px-3 my-2 py-4 bg-[rgba(248,97,92,0.08)] break-normal overflow-hidden">
             <div className="align-middle px-4 text-sm text-red-500">
-              <pre>{result.stderr}</pre>
+              <pre className="whitespace-pre-wrap">{result.stderr}</pre>
+            </div>
+          </div>
+        )}
+        {result.compile_output && result.status.id === 6 && (
+          <div className="group relative px-3 my-2 py-4 bg-[rgba(248,97,92,0.08)] break-normal overflow-hidden">
+            <div className="align-middle px-4 text-sm text-red-500">
+              <pre className="whitespace-pre-wrap">{result.compile_output}</pre>
             </div>
           </div>
         )}

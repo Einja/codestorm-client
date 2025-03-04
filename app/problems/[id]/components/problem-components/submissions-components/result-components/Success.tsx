@@ -7,7 +7,7 @@ const Success = () => {
       <div className="flex flex-col">
         <div className="flex items-center space-x-4 mx-7 py-3">
           <div className="text-lg font-bold text-emerald-400">Accepted</div>
-          <div className="">
+          <div className="text-gray-200 text-sm">
             {casesPassed}/{totalCases} testcases passed
           </div>
         </div>
@@ -21,7 +21,7 @@ const Success = () => {
           <div className="flex flex-col h-48 w-1/2 items-center justify-center p-3 bg-gray-700 rounded-lg">
             <div className="text-gray-400 text-md">Memory</div>
             <div className="text-2xl font-bold">
-              {Math.round(result.memory / 1048576)} MB
+              {Math.round(result.memory / 1024)} KB
             </div>
           </div>
         </div>
