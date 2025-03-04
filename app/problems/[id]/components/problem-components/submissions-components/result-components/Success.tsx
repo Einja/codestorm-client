@@ -15,7 +15,7 @@ const Success = () => {
           <div className="flex flex-col h-48 w-1/2 items-center justify-center p-3 bg-gray-700 rounded-lg">
             <div className="text-gray-400 text-md">Runtime</div>
             <div className="text-2xl font-bold">
-              {(result.time * 1000)} ms
+              {(Number(result.time) * 1000)} ms
             </div>
           </div>
           <div className="flex flex-col h-48 w-1/2 items-center justify-center p-3 bg-gray-700 rounded-lg">
