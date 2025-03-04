@@ -94,7 +94,7 @@ const Console: React.FC<ConsoleProps> = ({
     };
 
     fetchSampleCases();
-  }, []);
+  }, [problemId, sampleCases.length]);
 
   const handleCasesFromTestCases = (
     casesFromTestCases: SampleCaseAttributes[]

@@ -35,7 +35,7 @@ export default function ProblemPage({ params }: { params: Promise<Params> }) {
     };
 
     fetchProblem();
-  }, []);
+  }, [param.id]);
 
   if (!problem) {
     return (

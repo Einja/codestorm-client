@@ -36,13 +36,13 @@ const Editor: React.FC<EditorProps> = ({ id, code, setCode }) => {
     };
 
     fetchProblem();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (problem) {
       setCode(formatCodeTemplate(language, problem));
     }
-  }, [problem, language]);
+  }, [problem, language, setCode]);
   const handleEditorChange = (value: string | undefined) => {
     if (value) {
       setCode(value);
