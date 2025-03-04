@@ -9,7 +9,7 @@ interface AuthModelProps {
 }
 
 const AuthModel: React.FC<AuthModelProps> = ({ onClose , displayCreateAccount }) => {
-  const [toggleLogin, setToggleLogin] = useState(displayCreateAccount);
+  const [toggleLogin, setToggleLogin] = useState<boolean>(displayCreateAccount);
 
   const switchAuthDisplay = () => {
     setToggleLogin(!toggleLogin);

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { MathJaxContext } from "better-react-mathjax";
+import { MathJax, MathJaxContext } from "better-react-mathjax";
 import { readProblemById } from "@/backend/firebase/database/index";
 import { SubmissionContextProvider } from "@/components/context/SubmissionContext";
 import { LanguageContextProvider } from "@/components/context/LanguageContext";
@@ -24,6 +24,13 @@ interface ProblemAttributes {
   runtimeLimit: string;
   tags: Array<string>;
 }
+
+declare global {
+  interface Window {
+    MathJax: any;
+  }
+}
+
 export default function ProblemPage({ params }: { params: Promise<Params> }) {
   const param = React.use(params);
   const [code, setCode] = useState<string>("");
@@ -32,6 +39,12 @@ export default function ProblemPage({ params }: { params: Promise<Params> }) {
     const fetchProblem = async () => {
       const data = await readProblemById(param.id);
       setProblems(data);
+
+      setTimeout(() => {
+        if (window.MathJax) {
+          window.MathJax.typeset();
+        }
+      }, 200);
     };
 
     fetchProblem();
