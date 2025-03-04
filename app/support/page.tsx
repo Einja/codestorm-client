@@ -4,10 +4,11 @@ import React, { useState } from "react";
 export default function Page() {
   const [donation, setDonation] = useState("");
   const handlePayment = async (amount: number) => {
-    if (!amount || amount <= 0) {
+    if (!amount || amount < 1 || amount > 100) {
       alert("Please enter a valid donation amount.");
       return;
     }
+    amount = parseFloat(amount.toFixed(2));
     try {
       const options = {
         method: "POST",
@@ -44,7 +45,7 @@ export default function Page() {
       </div>
       <div className="text-lg font-bold mt-20 mb-3">
         Thank you for stopping by to visit my website. If you would like to show
-        your support, please refer to the donation button below:
+        your support, please refer to the donation button below (Minimum $1, Max $100):
       </div>
       <div className="flex flex-col items-center">
         <input
@@ -55,7 +56,7 @@ export default function Page() {
           onChange={(e) => setDonation(e.target.value)}
         />
         <button
-          onClick={() => handlePayment(parseInt(donation))}
+          onClick={() => handlePayment(parseFloat(donation))}
           className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition"
         >
           Donate
