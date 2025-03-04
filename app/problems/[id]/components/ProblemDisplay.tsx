@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Problem from "./problem-components/Problem";
 import Submissions from "./problem-components/Submissions"
+import { SubmissionContext } from "@/components/context/SubmissionContext";
 interface ProblemDisplayProps {
   problem: ProblemAttributes;
 }
@@ -19,10 +20,10 @@ interface ProblemAttributes {
   tags: Array<string>;
 }
 const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem }) => {
-  const [activeTab, setActiveTab] = useState<string>("problem");
+  const {problemTab, setProblemTab} = useContext(SubmissionContext);
 
   const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
+    setProblemTab(tab);
   };
 
   return (
@@ -31,7 +32,7 @@ const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem }) => {
         <div className="mr-2">
           <button
             className="px-2"
-            style={activeTab === "problem" ? { fontWeight: "bold" } : {}}
+            style={problemTab === "problem" ? { fontWeight: "bold" } : {}}
             onClick={() => handleTabClick("problem")}
           >
             Problem
@@ -40,7 +41,7 @@ const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem }) => {
         <div className="mx-2">
           <button
             className="px-2"
-            style={activeTab === "submissions" ? { fontWeight: "bold" } : {}}
+            style={problemTab === "submissions" ? { fontWeight: "bold" } : {}}
             onClick={() => handleTabClick("submissions")}
           >
             Submissions
@@ -48,8 +49,8 @@ const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem }) => {
         </div>
       </div>
       <hr />
-      {activeTab === "problem" && <Problem problem={problem} />}
-      {activeTab === "submissions" && <Submissions />}
+      {problemTab === "problem" && <Problem problem={problem} />}
+      {problemTab === "submissions" && <Submissions />}
     </div>
   );
 };

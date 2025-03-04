@@ -9,9 +9,9 @@ interface FilterContextType {
 }
 
 export const FilterContext = createContext<FilterContextType>({
-  minDiff: 0,
+  minDiff: "",
   setMinDiff: () => {},
-  maxDiff: 9999,
+  maxDiff: "",
   setMaxDiff: () => {},
 });
 

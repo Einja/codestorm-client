@@ -6,6 +6,7 @@ import {
   query,
   where,
   getDoc,
+  addDoc,
   setDoc,
   getDocs,
 } from "firebase/firestore";
@@ -70,6 +71,10 @@ const addProblem = async (problem) => {
 };
 
 //******************* TESTCASES ********************//
+
+// input: problemId (string)
+// output: array of testcase data
+// purpose: extract all testcases that are deemed sample cases.
 const readSampleTestcasesById = async (problemId) => {
     const collectionRef = collection(db, "testcases");
     const q = query(collectionRef, where('problemId', '==', problemId), where('sampleCase', '==', true));
@@ -78,4 +83,22 @@ const readSampleTestcasesById = async (problemId) => {
     return data;
 }
 
-export { readProblemSummaries, readProblemById, addProblem, readSampleTestcasesById };
+const readTestCasesById = async (problemId) => {
+  const collectionRef = collection(db, "testcases");
+  const q = query(collectionRef, where('problemId', '==', problemId));
+  const querySnapshot = await getDocs(q);
+  const data = querySnapshot.docs.map(doc => doc.data());
+  return data;
+}
+
+
+//***************** SUBMISSIONS ********************//
+const addSubmission = async (submissionData) => {
+  try {
+    await addDoc(collection(db, "submissions"), submissionData);
+    console.log(`Added submission to collections`);
+  } catch (error) {
+    console.error("Error adding submission: ", error);
+  }
+}
+export { readProblemSummaries, readProblemById, addProblem, readSampleTestcasesById, readTestCasesById, addSubmission };

@@ -1,6 +1,5 @@
-'use server';
-const url = "https://judge0-ce.p.rapidapi.com/submissions?wait=true";
-const apiKey = process.env.JUDGE0_API_KEY;
+"use server";
+import { formatCPPEnv, formatPythonEnv } from "./formatOutputs";
 
 /*
 C++ -> language_id = 76
@@ -8,46 +7,61 @@ Python3 -> language_id = 92
 */
 
 const languageToId = {
-    cpp: 76,
-    python: 92,
+  cpp: 76,
+  python: 92,
+};
+
+const handleSubmission = async (code, language, testCases) => {
+  let judgeCode = "";
+  switch (language) {
+    case "cpp":
+      judgeCode = formatCPPEnv(code, testCases, language);
+      break;
+
+    case "python":
+      judgeCode = formatPythonEnv(code, testCases, language);
+      break;
+  }
+  const url = "https://judge0-ce.p.rapidapi.com/submissions?wait=true";
+  const apiKey = process.env.JUDGE0_API_KEY;
+  const options = {
+    method: "POST",
+    headers: {
+      "x-rapidapi-key": apiKey,
+      "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({
+      language_id: languageToId[language],
+      source_code: judgeCode,
+      cpu_time_limit: 5,
+      memory_limit: 256000,
+    }),
   };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
 
-const handleSubmission = async (code, language) => {
-    const judgeCode = `
-    #include <bits/stdc++.h>
-    using namespace std;
-    
-    ${code}
-
-    int main() {
-        Solution sol;
-        return 0;
-    }`
-
-    const options = {
-        method: 'POST',
-        headers: {
-            'x-rapidapi-key': apiKey,
-            'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-            'Content-Type': 'application/json'
-        },
-    
-        body: JSON.stringify({
-            language_id: languageToId[language],
-            source_code: judgeCode,
-            cpu_time_limit: 2,
-            memory_limit: 128000,
-        })
+    if (!result || !result.status || result.status.id !== 3) {
+      return { result, casesPassed: -1, totalCases: -1 };
     }
 
-    try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        return result;
-    } catch (error) {
-        console.error(error);
+    const outputs = result["stdout"].split("\n");
+    const totalCases = testCases.length;
+    let casesPassed = 0;
+    for (let i = 0; i < testCases.length; i++) {
+      if (outputs[i]?.trim() == testCases[i].expectedOutput.trim()) {
+        casesPassed++;
+      }
     }
-}
 
+
+        
+    return { result, casesPassed, totalCases };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export { handleSubmission };

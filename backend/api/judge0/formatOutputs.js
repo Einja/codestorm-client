@@ -84,6 +84,16 @@ const formatCPPOutput = (sampleCases, language) => {
 const formatPythonEnv = (code, sampleCases, language) => {
   return `
 from typing import List
+def printCase(value):
+    if isinstance(value, list):
+        print("[", end="")
+        print(",".join(map(str, value)), end="")
+        print("]")
+    elif isinstance(value, bool):
+        print("true" if value else "false")
+    else:
+        print(value)
+        
 ${code}
 def main():
     sol = Solution()
@@ -96,7 +106,7 @@ if __name__ == "__main__":
 const formatPythonOutput = (sampleCases, language) => {
   return sampleCases
     .map((sampleCase) => {
-      return `    print(sol.solution(${formatInput(
+      return `    printCase(sol.solution(${formatInput(
         sampleCase.input,
         sampleCase.inputTypes,
         language
@@ -104,5 +114,7 @@ const formatPythonOutput = (sampleCases, language) => {
     })
     .join("\n");
 };
+
+
 
 export { formatCPPEnv, formatPythonEnv };

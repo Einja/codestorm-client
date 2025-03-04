@@ -38,6 +38,16 @@ const Problem: React.FC<ProblemProps> = ({ problem }) => {
           </div>
         ))}
       </div>
+      <div className="px-5 pt-5">Constraints:</div>
+      <div className="px-5">{problem.constraints}</div>
+      <div className="px-5 pt-5">Tags:</div>
+      <div className="px-5 pt-2">
+        {problem.tags.map((tag, index) => (
+          <span key={index} className="bg-gray-700 px-3 py-1 text-sm font-semibold mr-2">
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };

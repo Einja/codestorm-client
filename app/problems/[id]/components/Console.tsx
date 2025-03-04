@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { handleRunCases } from "@/backend/api/judge0/handleRunCases";
 import { handleSubmission } from "@/backend/api/judge0/handleSubmission";
+import { SubmissionContext } from "@/components/context/SubmissionContext";
 import { LanguageContext } from "@/components/context/LanguageContext";
 import { UserContext } from "@/components/context/AuthContext";
 import TestCases from "./console-components/TestCases";
 import Output from "./console-components/Output";
-import { readSampleTestcasesById } from "@/backend/firebase/database";
+import {
+  readSampleTestcasesById,
+  readTestCasesById,
+  addSubmission
+} from "@/backend/firebase/database";
 import { ToastContainer, toast, Flip } from "react-toastify";
 /*
 problemId: string,
@@ -58,10 +63,10 @@ const Console: React.FC<ConsoleProps> = ({
 
   const { language } = useContext(LanguageContext);
 
-  const [loading, setLoading] = useState(false);
-  const [showResult, setShowResult] = useState(false);
+  const [consoleLoading, setConsoleLoading] = useState(false);
+  const [showConsoleResult, setShowConsoleResult] = useState(false);
   const [sampleCases, setSampleCases] = useState<SampleCaseAttributes[]>([]);
-  const [result, setResult] = useState<ResultAttributes>({
+  const [consoleResult, setConsoleResult] = useState<ResultAttributes>({
     compile_output: null,
     memory: 0,
     message: null,
@@ -103,8 +108,8 @@ const Console: React.FC<ConsoleProps> = ({
     sampleCases: SampleCaseAttributes[]
   ) => {
     try {
-      setShowResult(false);
-      setLoading(true);
+      setShowConsoleResult(false);
+      setConsoleLoading(true);
       setActiveTab("output");
 
       const minWait = new Promise((resolve) => setTimeout(resolve, 3000));
@@ -112,27 +117,71 @@ const Console: React.FC<ConsoleProps> = ({
       const [output] = await Promise.all([outputPromise, minWait]);
 
       if (!output) {
-        console.error("Error: No output received from handleRunCases");
+        console.error("An unknown error occurred.");
         return;
       }
-      setResult(output);
+      setConsoleResult(output);
     } catch (error) {
       console.error("Error running cases:", error);
     } finally {
-      setLoading(false);
-      setShowResult(true);
+      setConsoleLoading(false);
+      setShowConsoleResult(true);
     }
   };
 
+  const {
+    setLoading,
+    setResult,
+    setShowResult,
+    setCasesPassed,
+    setTotalCases,
+    setProblemTab,
+  } = useContext(SubmissionContext);
+
   const handleSubmitClick = async (code: string, language: string) => {
+    const testCases = await readTestCasesById(problemId);
     if (!user) {
       notAuth();
       return;
     }
-    console.log("Success!");
+
     // comment here to prevent breaking api limit every day...
-    // const output = await handleSubmission(code, language);
-    // console.log(output);
+    try {
+      setShowResult(false);
+      setLoading(true);
+      setProblemTab("submissions");
+      const minWait = new Promise((resolve) => setTimeout(resolve, 3000));
+      const outputPromise = await handleSubmission(code, language, testCases);
+      const [output] = await Promise.all([outputPromise, minWait]);
+      console.log(testCases);
+      if (!output) {
+        console.error("An unknown error occurred.");
+        return;
+      }
+      setResult(output["result"]);
+      setCasesPassed(output["casesPassed"]);
+      setTotalCases(output["totalCases"]);
+
+      const submissionData = {
+        userId: user.displayName,
+        problemId: problemId,
+        code: code,
+        language: language,
+        status: output["result"].status.description, 
+        casesPassed: output["casesPassed"],
+        totalCases: output["totalCases"],
+        memory: Math.round(output["result"].memory / 1024) + " KB",
+        runtime: (parseFloat(output["result"].time) * 1000).toFixed(2) + " ms",
+        submittedAt: new Date().toISOString(),
+      };
+  
+      await addSubmission(submissionData);
+    } catch (error) {
+      console.error("Error submitting:", error);
+    } finally {
+      setLoading(false);
+      setShowResult(true);
+    }
   };
 
   return (
@@ -198,9 +247,9 @@ const Console: React.FC<ConsoleProps> = ({
       )}
       {activeTab === "output" && (
         <Output
-          loading={loading}
-          result={result}
-          showResult={showResult}
+          loading={consoleLoading}
+          result={consoleResult}
+          showResult={showConsoleResult}
           sampleCases={sampleCases}
         />
       )}
