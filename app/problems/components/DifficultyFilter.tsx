@@ -8,7 +8,7 @@ const DifficultyFilter: React.FC = () => {
   const {minDiff, setMinDiff, maxDiff, setMaxDiff} = useContext(FilterContext);
 
   return (
-    <div className="h-full flex flex-col justify-center items-center bg-gray-500 p-6 mx-3 rounded-lg text-white ">
+    <div className="bg-gradient-to-r from-gray-500 to-gray-700 h-full flex flex-col justify-center items-center bg-gray-500 p-6 mx-3 rounded-lg text-white ">
       <div className="text-3xl">Difficulty Filter</div>
       <div className="my-10">
         <input

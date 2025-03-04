@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <FilterContextProvider>
       <div className="fade-in">
-        <div className="conatiner mb-20">
+        <div className="container mb-20">
           <h1 className="text-left max-w-lg text-4xl">Problems</h1>
         </div>
         <div className="flex flex-col md:flex-row">

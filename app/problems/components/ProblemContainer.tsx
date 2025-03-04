@@ -28,7 +28,7 @@ const ProblemContainer: React.FC = () => {
     fetchProblemSummaries();
   }, []);
   return (
-    <div className="bg-gray-500 p-6 mx-3 rounded-lg text-white overflow-x-auto no-scrollbar">
+    <div className="bg-gradient-to-r from-gray-400 to-gray-500 p-6 mx-3 rounded-lg text-white overflow-x-auto no-scrollbar">
       <table className="w-full shadow-xl rounded-lg overflow-hidden">
         <thead className="bg-gray-600">
           <tr>

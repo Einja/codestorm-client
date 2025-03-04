@@ -8,14 +8,14 @@
 }
 
 [data-theme="dark"] {
-  --background-color:rgb(10, 10, 10);
-  --background-color2:rgb(20, 20, 20);
+  --background-color: rgb(10, 10, 10);
+  --background-color2: rgb(20, 20, 20);
   --text-color: #ffffff;
 }
 
 [data-theme="light"] {
   --background-color: #ffffff;
-  --background-color2:rgb(220, 220, 220);
+  --background-color2: rgb(220, 220, 220);
   --text-color: #000000;
 }
 
@@ -35,7 +35,7 @@ body {
   transition: background-color 0.3s, color 0.3s;
   font-family: "Proxima", sans-serif;
   font-weight: 800;
-  letter-spacing: 2px
+  letter-spacing: 2px;
 }
 
 .font-8Bit {
@@ -51,6 +51,14 @@ body {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
 
