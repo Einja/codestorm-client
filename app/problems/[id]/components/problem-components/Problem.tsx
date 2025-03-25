@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProblemDesc from "./ProblemDesc";
 interface ProblemProps {
   problem: ProblemAttributes;
@@ -18,7 +18,20 @@ interface ProblemAttributes {
   tags: Array<string>;
 }
 
+declare global {
+  interface Window {
+    MathJax: any;
+  }
+}
+
 const Problem: React.FC<ProblemProps> = ({ problem }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      if (window.MathJax) {
+        window.MathJax.typeset();
+      }
+    }, 0);
+  }, []);
   return (
     <div>
       <div className="p-5 text-center">
@@ -43,7 +56,10 @@ const Problem: React.FC<ProblemProps> = ({ problem }) => {
       <div className="px-5 pt-5">Tags:</div>
       <div className="px-5 pt-2">
         {problem.tags.map((tag, index) => (
-          <span key={index} className="bg-gray-700 px-3 py-1 text-sm font-semibold mr-2">
+          <span
+            key={index}
+            className="bg-gray-700 px-3 py-1 text-sm font-semibold mr-2"
+          >
             {tag}
           </span>
         ))}

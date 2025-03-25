@@ -25,11 +25,7 @@ interface ProblemAttributes {
   tags: Array<string>;
 }
 
-declare global {
-  interface Window {
-    MathJax: any;
-  }
-}
+
 
 export default function ProblemPage({ params }: { params: Promise<Params> }) {
   const param = React.use(params);
@@ -39,14 +35,7 @@ export default function ProblemPage({ params }: { params: Promise<Params> }) {
     const fetchProblem = async () => {
       const data = await readProblemById(param.id);
       setProblems(data);
-
-      setTimeout(() => {
-        if (window.MathJax) {
-          window.MathJax.typeset();
-        }
-      }, 200);
     };
-
     fetchProblem();
   }, [param.id]);
 

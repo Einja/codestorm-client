@@ -14,6 +14,9 @@ const CreateAccount: React.FC<CreateAccountProps> = ({ switchAuthDisplay }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      if (username.length > 13 || username.length < 4) {
+        throw new Error("Username must be between 4-13 characters.");
+      }
       await signUp(username, email, password);
       window.location.reload();
     } catch (error) {
